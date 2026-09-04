@@ -26,17 +26,21 @@ AI-ML-Journey/
   templates/                       reusable templates (e.g. the ML project workflow)
   00_Foundations/                  planned: Python/math foundations, not started yet
   01_Linear_Regression/            Simple and Multiple Linear Regression, Gradient Descent
-    NOTES.md                       concept notes: theory, from scratch code, metrics
+    notes/                         concept notes and reference material for this topic
     03_Gradient_Descent/           gradient descent (blocked, see below)
+      notes/
     project/                       real project: used car price prediction
+      notes/
   02_Uni&MultivariateAnalysis/     univariate and multivariate EDA, pandas profiling
 ```
+
+Every code folder keeps a `notes/` subfolder alongside it. That is where the concept explanations, worked examples, and reasoning behind every decision live, written to be read cold by a beginner. This README is the only file in the repository meant to pitch the project; everything under `notes/` is study material for me (or for you, if you found this repo and want to learn alongside it).
 
 ## Projects
 
 | Project | Status | Description |
 |---|---|---|
-| Used Car Price Prediction | In progress (Stage 2 of 8 complete) | Multiple linear regression on 15,171 real used car listings scraped from a Karachi marketplace. See `01_Linear_Regression/project/`, including `NOTES.md` for the full reasoning behind every cleaning decision. |
+| Used Car Price Prediction | In progress (Stage 2 of 8 complete) | Multiple linear regression on 15,171 real used car listings scraped from a Karachi marketplace. See `01_Linear_Regression/project/`, and `01_Linear_Regression/project/notes/` for the full reasoning behind every cleaning decision. |
 
 ## Progress Tracker
 

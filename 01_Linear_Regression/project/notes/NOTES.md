@@ -1,6 +1,6 @@
 # Used Car Price Prediction: Concept Notes
 
-Written to be read cold, by anyone, not just future-me. If you're a beginner reading someone else's GitHub repo, this is meant to walk you through not just what the code does, but how we figured out what to do and why, mistakes included. General ML/stats theory (linear regression, metrics) lives in `../NOTES.md`, this file is specific to real decisions made on this exact dataset.
+Written to be read cold, by anyone, not just future-me. If you're a beginner reading someone else's GitHub repo, this is meant to walk you through not just what the code does, but how we figured out what to do and why, mistakes included. General ML/stats theory (linear regression, metrics) lives in `../../notes/NOTES.md`, this file is specific to real decisions made on this exact dataset.
 
 Dataset: 15,171 real used-car listings scraped from a Karachi marketplace (`used_car_listings_13_12_2025.csv`). Target: `listingPrice`.
 

@@ -27,7 +27,7 @@ The goal is not only to remember code. The goal is to understand:
 - practice problems;
 - the complete workflow used in the notebook.
 
-The accompanying notebook is `learning.ipynb`.
+The accompanying notebook is `learningSimpleLinearRegression.ipynb`.
 
 The dataset used for the learning example is `placement.csv`.
 
