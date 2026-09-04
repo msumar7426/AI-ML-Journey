@@ -1,18 +1,18 @@
-# 🚀 AI & Machine Learning Journey
+AI & Machine Learning Journey
 
 > A structured, hands-on roadmap documenting my journey to becoming an AI/ML Engineer.
 
 ---
 
-## 👋 About Me
+About Me
 
-Hi! I'm **M S Umar**, a Computer Science student passionate about Artificial Intelligence, Machine Learning, and building impactful software.
+Hi! I'm M S Umar, a Computer Science student passionate about Artificial Intelligence, Machine Learning, and building impactful software.
 
 This repository documents my learning journey through theory, implementation, projects, and interview preparation.
 
 ---
 
-## 🎯 Goals
+Goals
 
 - Build strong Machine Learning fundamentals.
 - Implement algorithms from scratch.
@@ -23,7 +23,7 @@ This repository documents my learning journey through theory, implementation, pr
 
 ---
 
-## 🛠 Tech Stack
+Tech Stack
 
 - Python
 - NumPy
@@ -35,7 +35,7 @@ This repository documents my learning journey through theory, implementation, pr
 
 ---
 
-## 📂 Repository Structure
+Repository Structure
 
 ```text
 00_Foundations/
@@ -49,19 +49,19 @@ templates/
 
 ---
 
-## 📈 Progress Tracker
+Progress Tracker
 
 | Module | Status |
 |---------|--------|
-| Environment Setup | ✅ |
-| Git & GitHub | ✅ |
-| Foundations | ⏳ |
-| Machine Learning | ⏳ |
-| Projects | ⏳ |
+| Environment Setup | Done |
+| Git & GitHub | Done |
+| Foundations | In Progress |
+| Machine Learning | In Progress |
+| Projects | In Progress |
 
 ---
 
-## 📚 Learning Approach
+Learning Approach
 
 Every topic follows this workflow:
 
@@ -76,7 +76,7 @@ Every topic follows this workflow:
 
 ---
 
-## 🌟 Long-Term Vision
+Long-Term Vision
 
 This repository will grow beyond a course into a complete AI/ML portfolio featuring:
 
@@ -89,4 +89,4 @@ This repository will grow beyond a course into a complete AI/ML portfolio featur
 
 ---
 
-⭐ Thanks for visiting!
+Thanks for visiting!
