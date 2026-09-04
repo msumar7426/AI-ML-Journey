@@ -389,5 +389,48 @@ Conclusion: `transmission` looks like a genuinely useful predictive signal, a ~3
 
 ---
 
-(Next: `manufacturer` and `variant`, the higher-cardinality categorical columns. Before deciding how to handle them, check their actual cardinality with `.nunique()` rather than assuming, then decide per column whether to keep, group into top-N-plus-Other, or drop, with the reasoning written down either way.)
+## Part 11: Stage 3 EDA, Bivariate: manufacturer, variant, and dropping the redundant name column
+
+### Checking cardinality before deciding anything
+
+Before deciding how to handle `manufacturer` and `variant`, their actual cardinality was checked directly rather than assumed:
+
+```python
+df_final['manufacturer'].nunique()   # 58
+df_final['variant'].nunique()        # 349
+```
+
+`print(df_final['manufacturer'].value_counts())` showed a heavily skewed distribution: Toyota (3002), Suzuki (2871), Honda (1563), and Daihatsu (886) alone make up roughly 85% of all rows, dropping off fast after that into a long tail, over a dozen brands (GMC, SsangYong, Jaguar, Willys, Hummer, and others) appear exactly once each.
+
+`print(df_final['variant'].value_counts())` showed the same shape: Corolla (925), Alto (737), Civic (726), Cultus (567), City (468) dominate, with many variants down at a count of 1 in the tail (CR-V, Cressida, Charmant, Pixis Mega, and a stray " Mini Bus" with a leading space).
+
+This is a classic case for a top-N-plus-Other grouping strategy once we reach Stage 4 (Feature Engineering): keep the well-represented categories as their own groups, since brand and model both genuinely predict price, and bucket the long tail of rare, single-listing categories together so they don't each get a dummy column the model can never generalize from. The actual N cutoff and implementation is deferred to Stage 4, this Stage 3 pass was only about understanding the shape of the problem.
+
+### Discovering name is fully redundant
+
+While working through this, a third categorical column, `name`, turned out to need a completely different decision. `df_final['name'].nunique()` returned 1749, unusually high. Looking at a sample (`df_final['name'].head(10)`) showed a clear pattern: every value is just `"{manufacturer} {variant} {year} for sale in Karachi"`, for example `"Toyota Prius 2013 for sale in Karachi"`. The `"for sale in Karachi"` suffix carries zero information, since the entire dataset is Karachi listings.
+
+Verified this rather than trusting a 10-row sample:
+
+```python
+reconstructed = df_final['manufacturer'] + ' ' + df_final['variant'] + ' ' + df_final['year'].astype(int).astype(str) + ' for sale in Karachi'
+(reconstructed == df_final['name']).sum()
+```
+
+10,050 rows matched exactly. The roughly 200 that did not were inspected directly rather than dismissed, and turned out to share one specific cause: for Mercedes-Benz rows, `variant` already includes the word "Benz" (e.g. `variant` = `"Benz C Class"` with `manufacturer` = `"Mercedes Benz"`), so the naive reconstruction doubled it (`"Mercedes Benz Benz C Class..."`) while the real `name` field only says it once. Not new information hiding in the mismatches, just an artifact of the reconstruction logic.
+
+### The fix
+
+Same situation as `age` vs `year` earlier in Stage 2: `name` is a fixed transform of columns that already exist (`manufacturer`, `variant`, `year`), so it contributes nothing a model doesn't already have access to. Dropped entirely rather than treated as a genuine high-cardinality feature to encode:
+
+```python
+df_final = df_final.drop(columns=['name'])
+df_final.shape
+```
+
+Placed back in Stage 2, next to the `age`/`year` redundancy fix, following the same discovered-in-Stage-3-fixed-in-Stage-2 rule used throughout this project.
+
+---
+
+(Next: Stage 4, Feature Engineering, decide the actual top-N-plus-Other cutoffs for `manufacturer` and `variant`, then Multivariate analysis if there is time before moving to preprocessing.)
 
