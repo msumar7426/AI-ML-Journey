@@ -346,5 +346,48 @@ Same stage-boundary rule as always applied here: this was discovered while doing
 
 ---
 
-(Next: continue Bivariate with `transmission`, then the higher-cardinality categorical columns, `manufacturer` and `variant`, which will need a different approach since a boxplot with dozens or hundreds of categories would be unreadable.)
+## Part 10: Stage 3 EDA, Bivariate: transmission
+
+Same boxplot approach used for `fuelType`, applied to `transmission`:
+
+```python
+df_final.boxplot(column='listingPrice', by='transmission')
+plt.xlabel('Transmission')
+plt.ylabel('Listed Price')
+plt.title('Listing Price by Transmission Type')
+plt.suptitle('')
+plt.show()
+```
+
+### Reading the boxplot, then verifying with real numbers
+
+Visually, Automatic's box sat noticeably higher than Manual's, and Automatic had a huge column of outlier dots stretching up to very high prices while Manual barely had any. Read purely off the picture, that could mean two different things: Automatic cars are priced higher, and/or there are simply a lot more Automatic listings in the dataset (more rows naturally means more chances for outlier dots to appear, regardless of price patterns).
+
+Same discipline as always: a visual impression is a starting point, not a conclusion, so it got checked against actual numbers rather than trusted as-is.
+
+```python
+df_final['transmission'].value_counts()
+```
+
+Result: `Automatic: 6611`, `Manual: 3553`, a real 65/35 split. Automatic is genuinely the majority, but not the "enormous" imbalance the crowded outlier dots first suggested.
+
+```python
+df_final.groupby('transmission')['listingPrice'].median()
+```
+
+Result: `Automatic: 4,000,000`, `Manual: 1,090,000`, roughly a 3.7x difference. This confirms the boxplot's visual pattern with a concrete, citable number instead of "the box looked higher."
+
+### How groupby().median() works
+
+`df_final.groupby('transmission')` splits the whole dataframe into separate buckets by the values in the `transmission` column, every `Automatic` row into one bucket, every `Manual` row into another, nothing calculated yet, just sorted. `['listingPrice']` then narrows each bucket down to just the price column. `.median()` computes the median separately within each bucket. The result is one median value per group, the same statistic the boxplot's line-inside-the-box was already showing visually, just requested directly as a number.
+
+### Outliers are not automatically errors
+
+Important distinction from the mileage/engine investigations: those outliers were genuine data-quality problems, physically impossible values that needed removing. Here, an outlier dot above Automatic's box is very likely a real, legitimately expensive car (a luxury automatic vehicle), not a data error. "Outlier" in a boxplot only means "statistically unusual relative to its own group," it does not by itself mean wrong, fake, or mispriced. Whether an outlier is a problem or a genuine data point always depends on domain context, not the label alone.
+
+Conclusion: `transmission` looks like a genuinely useful predictive signal, a ~3.7x median price gap between groups is a real, sizeable difference.
+
+---
+
+(Next: `manufacturer` and `variant`, the higher-cardinality categorical columns. Before deciding how to handle them, check their actual cardinality with `.nunique()` rather than assuming, then decide per column whether to keep, group into top-N-plus-Other, or drop, with the reasoning written down either way.)
 
