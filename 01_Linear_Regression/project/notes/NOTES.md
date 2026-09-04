@@ -221,5 +221,38 @@ Documented limitation: this is a heuristic, not a certainty. A 1980 Toyota Corol
 
 ---
 
-(Next: keep going through Stage 3 univariate on `year` and `engine`, then Bivariate, comparing each feature against `listingPrice`.)
+## Part 7: Stage 3 EDA, Univariate: engine
+
+Plotted the same way as before: `df_final['engine'].hist(bins=50)`. Two things stood out immediately. A small bar right at 0, exactly as expected from Part 4, the 224 electric cars. And two separate tall peaks rather than one, roughly 800cc and roughly 1300-1600cc, matching the two most common car segments in this market, small economy hatchbacks and mid-size sedans.
+
+### A placeholder and a set of individual errors, found the same way as mileage
+
+Sorting descending by engine (`.sort_values(by='engine', ascending=False)`) surfaced a mix of problems, messier than mileage's, because engine size doesn't have one universal "normal" range the way mileage-per-year does, a truck, a kei car, and a luxury sedan all have completely different normal engine sizes.
+
+The clearest signal: three completely unrelated cars, a Suzuki Vitara (SUV), a Honda Civic (sedan), and a Toyota Land Cruiser (4x4), all shared the identical value `15000` (15 liters, impossible for any of them). Same signature as mileage's `1000000` placeholder, an identical value across unrelated car types.
+
+Beyond that, several individual rows had engine sizes that don't make sense for what the car actually is: a Toyota IST (compact car) at `13004`, a Mitsubishi Pajero at `11000`, a Toyota Crown at `8000`, a Suzuki Alto (a tiny economy car) at `8000`, and a Daihatsu Move at `6600`. The Move is the clearest individual case: kei cars are a Japanese vehicle category with a legal engine cap of exactly 660cc, so `6600` is almost certainly the same "extra zero" mistake suspected earlier for mileage. An Isuzu NKR (a light delivery truck) at `6650` is a genuine gray area, trucks do run larger engines, so this one might be real, but it's on the high side even for that, and was not spared.
+
+### The case that looked like an error but wasn't
+
+A Mercedes-Benz S-Class at `6203` and seven separate Mercedes-Benz C-Class listings (spanning 2009 to 2013) at `6200` at first looked suspicious simply for being large numbers. But this is different from the placeholder cases: the value repeats consistently across the *same* model across *different* years, not across unrelated car types. That pattern matches a real shared engine spec, not a scraper artifact, and indeed the high-performance AMG variants of both the C-Class and S-Class genuinely carry engines around 6.2 liters. This was deliberately kept, not dropped.
+
+The lesson: "this value repeats identically across multiple rows" is not, by itself, proof of a placeholder. What matters is *what* is repeating it. Unrelated cars sharing an impossible number is a red flag. The same model sharing a real-world-plausible number across different years is exactly what genuine data looks like.
+
+### The fix
+
+```python
+# 6500 sits in the gap between the highest genuine value found (Mercedes AMG variants, ~6200-6203cc)
+# and the lowest confirmed error (Daihatsu Move at 6600cc, impossible for a 660cc-capped kei car)
+df_final = df_final[df_final['engine'] <= 6500]
+df_final.shape
+```
+
+Applied back in Stage 2, same rule as always: EDA discovers, cleaning changes `df_final`.
+
+Documented limitation: the Isuzu NKR at 6650cc is dropped along with the confirmed errors even though it might be a genuine truck engine, we couldn't be fully certain either way, and 6500 was chosen specifically because it's the cleanest line available between the confirmed-real Mercedes cluster and the confirmed-fake Move value, not because it's provably the correct cutoff in every case.
+
+---
+
+(Next: Stage 3 univariate on `year`, then Bivariate, comparing each feature against `listingPrice`.)
 
