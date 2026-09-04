@@ -1,4 +1,4 @@
-Used Car Price Prediction: Concept Notes
+# Used Car Price Prediction: Concept Notes
 
 Written to be read cold, by anyone, not just future-me. If you're a beginner reading someone else's GitHub repo, this is meant to walk you through not just what the code does, but how we figured out what to do and why, mistakes included. General ML/stats theory (linear regression, metrics) lives in `../NOTES.md`, this file is specific to real decisions made on this exact dataset.
 
@@ -6,7 +6,7 @@ Dataset: 15,171 real used-car listings scraped from a Karachi marketplace (`used
 
 ---
 
-Part 1: Calling a method vs. just naming it
+## Part 1: Calling a method vs. just naming it
 
 Before touching duplicates, this tripped us up twice, so it's worth its own section.
 
@@ -22,7 +22,7 @@ A function or method name on its own is just a label pointing at code sitting in
 
 ---
 
-Part 2: Finding exact duplicates
+## Part 2: Finding exact duplicates
 
 ```python
 df.duplicated().sum()
@@ -32,7 +32,7 @@ df.duplicated().sum()
 
 Result: 2,477 exact duplicate rows, about 16% of the entire dataset. Worth sitting with that number before doing anything about it; that's not noise, that's one row in six.
 
-The `keep` parameter
+### The `keep` parameter
 
 `duplicated()` always spares exactly one occurrence per repeated group and flags the rest as `True`, `keep` controls which occurrence is spared:
 
@@ -42,7 +42,7 @@ The `keep` parameter
 
 For counting duplicates, the default (`keep='first'`) is fine, you just want "how many extra copies exist." For looking at a duplicate group with your own eyes, you need `keep=False`, otherwise the very first (and "spared") copy gets filtered out of your view, and you're left staring at repeats with nothing to compare them against.
 
-Looking at the actual rows
+### Looking at the actual rows
 
 ```python
 df[df.duplicated(keep=False)].sort_values(by=['manufacturer','variant','year','mileage']).head(20)
@@ -55,7 +55,7 @@ This is a reusable pattern, not just a duplicates thing:
 df[ <condition that picks the rows you care about> ].sort_values(by=[ <columns that cluster related rows> ]).head(N)
 ```
 
-What we found, and how we figured out what it meant
+### What we found, and how we figured out what it meant
 
 Every duplicate pair we looked at had identical mileage, down to the exact kilometer (e.g. two separate rows both reading `45,812 km`), and the two copies of each pair sat far apart in the original row order (sometimes thousands of rows apart).
 
@@ -63,7 +63,7 @@ Two clues, one conclusion: mileage is a continuous, highly specific number, two 
 
 ---
 
-Part 3: Finding near-duplicates
+## Part 3: Finding near-duplicates
 
 Exact-duplicate detection only catches rows where every single column matches. But what about the same physical car, listed once, then listed again months later after being driven a bit more, mileage and maybe price would differ, so `duplicated()` would never flag it. That needs a looser check.
 
@@ -74,7 +74,7 @@ df[df.duplicated(subset=['manufacturer','variant','year','engine','fuelType','tr
 
 `subset=[...]` tells `duplicated()` to only compare the listed columns, everything else is ignored. Deliberately left out of the subset: `mileage` and `listingPrice`, those are exactly the two things we expect might legitimately differ between two snapshots of the same real car, and if we required them to match too, we'd miss the pattern we're trying to catch.
 
-Two very different things came back, and they need different handling
+### Two very different things came back, and they need different handling
 
 Audi A3 2016 (3 rows, all `Petrol`/`Automatic`/`1200cc`): mileages `101,000` / `41,000` / `62,000 km`, prices `5,950,000` / `6,700,000` / `5,850,000`, no two agree on anything. Conclusion: this is not duplication. Three different sellers, three different actual cars, that happen to share a common configuration. Real, legitimate, distinct data, must not be dropped.
 
@@ -82,7 +82,7 @@ Audi A4 2014 (part of the group): an already-known exact-duplicate pair (`48,000
 
 Takeaway: "near-duplicate" isn't one category. It splits into at least two: coincidental matches on a popular configuration (keep, they're real), and genuine same-car-at-different-times matches (probably redundant, worth merging).
 
-The cleaning decision, and why "good enough, documented" was the right call here
+### The cleaning decision, and why "good enough, documented" was the right call here
 
 We could try to build a fully general "is this really the same car" classifier. For a first project, that's disproportionate, this dataset has no seller ID or listing ID to confirm identity with certainty, so perfect confidence isn't available at any amount of effort, only diminishing returns.
 
@@ -92,11 +92,11 @@ This is a deliberate, stated simplification, not a hidden shortcut, and that dis
 
 ---
 
-Part 4: Converting text columns into real numbers
+## Part 4: Converting text columns into real numbers
 
 Before this step: `df_clean = df.drop_duplicates(keep='first')` dropped the 2,477 exact duplicates (verified: `df_clean.shape` → `(12694, 10)`). But `mileage` (`"156,000 km"`) and `engine` (`"1800cc"`) are still text, not numbers, and no math (comparisons, model training, `groupby` aggregation) works correctly on text that merely looks like a number. Rule of habit going forward: before transforming or comparing any column, check `.dtype`, if it says `object`/`str` but the values look numeric, that's a sign it needs converting first.
 
-Mileage
+### Mileage
 
 ```python
 df_clean['mileage'] = df_clean['mileage'].str.replace(',', '').str.replace(' km', '').astype(int)
@@ -104,7 +104,7 @@ df_clean['mileage'] = df_clean['mileage'].str.replace(',', '').str.replace(' km'
 
 `.str` unlocks string operations across an entire column at once, instead of writing a loop. `.str.replace(',', '')` deletes every comma; `.str.replace(' km', '')` deletes the unit suffix; `.astype(int)` converts the now-clean text (`"156000"`) into an actual integer (`156000`).
 
-Engine: the same idea, plus a real landmine
+### Engine: the same idea, plus a real landmine
 
 The naive version, `df_clean['engine'].str.replace('cc', '').astype(int)`, crashes. Here's why, and how we found it.
 
@@ -126,7 +126,7 @@ df[~df['mileage'].str.match(r'^[\d,]+ km$')]   # rows that do NOT look like "<di
 
 The decision: for the 224 electric-car rows, set `engine = 0` rather than leaving it missing. Reasoning: `fuelType` is already a separate column that will go into the model, a plain multiple linear regression is additive, so the `engine` coefficient explains price-per-cc for combustion cars, while the `fuelType_Electric` indicator separately explains the "being electric" baseline shift. Setting `engine = 0` contributes nothing extra from the engine term for those rows, so it doesn't distort the combustion-car relationship. `NaN` would just force the same 0-vs-something decision later, since regression can't train on missing values anyway. One thing to remember: a future univariate plot of `engine` alone will show a spike of 224 cars at 0, that's expected, not a bug.
 
-The actual fix:
+### The actual fix
 
 ```python
 df_clean['engine'] = df_clean['engine'].str.replace('cc', '')
@@ -134,7 +134,7 @@ df_clean.loc[df_clean['engine'] == '', 'engine'] = '0'
 df_clean['engine'] = df_clean['engine'].astype(int)
 ```
 
-Traced through one row of each kind:
+### Traced through one row of each kind
 
 | | after line 1 (`str.replace('cc','')`) | after line 2 (`.loc[...]='0'`) | after line 3 (`.astype(int)`) |
 |---|---|---|---|
@@ -147,7 +147,7 @@ A subtlety caught along the way: an earlier attempt used `.str.replace('cc', ' '
 
 ---
 
-Part 5: Finishing Stage 2: near-duplicates, and dropping `age`
+## Part 5: Finishing Stage 2: near-duplicates, and dropping `age`
 
 Investigating near-duplicate groups. Grouped by every spec that should make two rows "the same car" (`manufacturer`, `variant`, `year`, `engine`, `fuelType`, `transmission`) and looked at the `mileage` spread inside each group:
 

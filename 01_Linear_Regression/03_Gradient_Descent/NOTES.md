@@ -1,4 +1,4 @@
-Gradient Descent: Concept Notes
+# Gradient Descent: Concept Notes
 
 Status: blocked, not started.
 

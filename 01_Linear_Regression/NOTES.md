@@ -1,10 +1,10 @@
-Linear Regression: Concept Notes
+# Linear Regression: Concept Notes
 
 Grounded in `learningSimpleLinearRegression.ipynb` (CGPA → Package) and `learningMultipleLinearRegression.ipynb`. Written so future-you can read this cold and reconstruct the logic without re-watching anything.
 
 ---
 
-Simple Linear Regression
+## Simple Linear Regression
 
 The idea: find the one straight line `y = mx + b` that fits a scatter of points best, here, predicting `package` from `cgpa`.
 
@@ -30,7 +30,7 @@ The gotcha worth remembering: after `train_test_split`, `X_train`/`y_train` keep
 
 ---
 
-Multiple Linear Regression: the Normal Equation
+## Multiple Linear Regression: the Normal Equation
 
 The idea: same goal as simple LR, but with many features at once. Instead of one slope, you get one coefficient per feature, solved for all at once using matrix algebra instead of a loop.
 
@@ -54,7 +54,7 @@ Verified in the notebook: `np.allclose(sklearn_lr.coef_, mul_lr.coef_)` and `np.
 
 ---
 
-Metrics: grounded in the tiny worked example
+## Metrics: grounded in the tiny worked example
 
 The notebook used a tiny hand-checkable example before trusting the real model:
 `actual = [10, 20, 30, 40]`, `predicted = [11, 18, 31, 39]`.
@@ -85,5 +85,5 @@ Plain-word problem it solves: plain R² can only go up (or stay flat) every time
 
 ---
 
-Standing rule
+## Standing rule
 When gradient descent's notebook has real code in it again, this file should also cover: why gradient descent exists as an alternative to the normal equation (hint: the normal equation needs to invert `XᵀX`, which gets computationally expensive/unstable with many features, gradient descent scales better), the update rule, and the role of the learning rate.

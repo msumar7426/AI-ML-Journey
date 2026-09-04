@@ -1,29 +1,14 @@
-AI & Machine Learning Journey
+# AI and Machine Learning Journey
 
-> A structured, hands-on roadmap documenting my journey to becoming an AI/ML Engineer.
+> A structured, hands on roadmap documenting my journey to becoming an AI/ML Engineer.
 
----
+## About
 
-About Me
+Hi, I am M S Umar, a Computer Science student passionate about Artificial Intelligence, Machine Learning, and building impactful software.
 
-Hi! I'm M S Umar, a Computer Science student passionate about Artificial Intelligence, Machine Learning, and building impactful software.
+This repository documents my learning journey through theory, implementation, real world projects, and interview preparation. Each topic is learned from CampusX's 100 Days of Machine Learning course, then extended with from scratch implementations and a real dataset project before moving to the next topic.
 
-This repository documents my learning journey through theory, implementation, projects, and interview preparation.
-
----
-
-Goals
-
-- Build strong Machine Learning fundamentals.
-- Implement algorithms from scratch.
-- Master Python for AI/ML.
-- Learn industry-standard libraries.
-- Build real-world projects.
-- Develop an interview-ready GitHub portfolio.
-
----
-
-Tech Stack
+## Tech Stack
 
 - Python
 - NumPy
@@ -31,37 +16,40 @@ Tech Stack
 - Matplotlib
 - Scikit-learn
 - Jupyter Notebook
-- Git & GitHub
+- Git and GitHub
 
----
-
-Repository Structure
+## Repository Structure
 
 ```text
-00_Foundations/
-01_Machine_Learning/
-Projects/
-datasets/
-assets/
-docs/
-templates/
+AI-ML-Journey/
+  AI_ML_Journey_Guidelines.md      how each topic is learned, step by step
+  templates/                       reusable templates (e.g. the ML project workflow)
+  00_Foundations/                  planned: Python/math foundations, not started yet
+  01_Linear_Regression/            Simple and Multiple Linear Regression, Gradient Descent
+    NOTES.md                       concept notes: theory, from scratch code, metrics
+    03_Gradient_Descent/           gradient descent (blocked, see below)
+    project/                       real project: used car price prediction
+  02_Uni&MultivariateAnalysis/     univariate and multivariate EDA, pandas profiling
 ```
 
----
+## Projects
 
-Progress Tracker
+| Project | Status | Description |
+|---|---|---|
+| Used Car Price Prediction | In progress (Stage 2 of 8 complete) | Multiple linear regression on 15,171 real used car listings scraped from a Karachi marketplace. See `01_Linear_Regression/project/`, including `NOTES.md` for the full reasoning behind every cleaning decision. |
+
+## Progress Tracker
 
 | Module | Status |
-|---------|--------|
+|---|---|
 | Environment Setup | Done |
-| Git & GitHub | Done |
-| Foundations | In Progress |
-| Machine Learning | In Progress |
-| Projects | In Progress |
+| Git and GitHub | Done |
+| Simple and Multiple Linear Regression (theory and from scratch code) | Done |
+| Gradient Descent | Blocked (source notebook is empty, needs to be redone) |
+| Used Car Price Prediction project | In progress |
+| Univariate and Multivariate Analysis | In progress |
 
----
-
-Learning Approach
+## Learning Approach
 
 Every topic follows this workflow:
 
@@ -74,9 +62,9 @@ Every topic follows this workflow:
 7. Document key learnings.
 8. Commit and push to GitHub.
 
----
+The full version of this workflow, including how to triage Python and math prerequisites for a new topic, is in `AI_ML_Journey_Guidelines.md`.
 
-Long-Term Vision
+## Long Term Vision
 
 This repository will grow beyond a course into a complete AI/ML portfolio featuring:
 
@@ -84,9 +72,10 @@ This repository will grow beyond a course into a complete AI/ML portfolio featur
 - Deep Learning
 - Natural Language Processing
 - Computer Vision
-- End-to-End AI Projects
+- End to end AI projects
 - Deployment
 
----
+## Contact
 
-Thanks for visiting!
+- GitHub: https://github.com/msumar7426
+- Email: muhammadsiddiqueumar1@gmail.com

@@ -1,10 +1,10 @@
-AI/ML Journey Guidelines
+# AI/ML Journey Guidelines
 
-> Purpose: These guidelines define how the AI/ML Journey will be learned, implemented, documented, reviewed, and developed into a job-ready portfolio.
+> **Purpose:** These guidelines define how the AI/ML Journey will be learned, implemented, documented, reviewed, and developed into a job-ready portfolio.
 
 ---
 
-1. Mission
+## 1. Mission
 
 The goal of this repository is not simply to complete the CampusX 100 Days of Machine Learning playlist.
 
@@ -21,19 +21,19 @@ The goal is to become capable of:
 - Building and documenting practical projects.
 - Maintaining a professional GitHub portfolio.
 
-Mastery is more important than speed.
+**Mastery is more important than speed.**
 
 ---
 
-2. Core Learning Philosophy
+# 2. Core Learning Philosophy
 
-Rule 1: One topic at a time
+### Rule 1: One topic at a time
 
 We focus on one major ML topic until its important concepts are understood.
 
 We do not rush through the playlist simply to maintain the 100-day schedule.
 
-Rule 2: Understand before memorizing
+### Rule 2: Understand before memorizing
 
 We prioritize:
 
@@ -43,13 +43,13 @@ over:
 
 > Memorization → Copying code → Moving on
 
-Rule 3: CampusX provides the learning path
+### Rule 3: CampusX provides the learning path
 
 CampusX is the primary course/resource guiding the sequence of topics.
 
 The mentor workflow expands each topic beyond the video where necessary.
 
-Rule 4: Learn what is relevant
+### Rule 4: Learn what is relevant
 
 We do not study entire subjects unnecessarily.
 
@@ -59,51 +59,51 @@ We do not stop ML to complete an entire calculus course.
 
 ---
 
-3. Standard Topic Workflow
+# 3. Standard Topic Workflow
 
 Every major CampusX topic follows this process:
 
 ```text
 1. Watch the CampusX video
- ↓
+        ↓
 2. Code along in VS Code
- ↓
+        ↓
 3. Make first-pass notes
- ↓
+        ↓
 4. Explain what was learned
- ↓
+        ↓
 5. Identify questions/confusion
- ↓
+        ↓
 6. Python prerequisite analysis
- ↓
+        ↓
 7. Mathematics prerequisite analysis
- ↓
+        ↓
 8. Fill conceptual gaps
- ↓
+        ↓
 9. Deep ML study
- ↓
+        ↓
 10. From-scratch implementation
- ↓
+        ↓
 11. Library implementation
- ↓
+        ↓
 12. Visualization / experiments
- ↓
+        ↓
 13. Evaluation
- ↓
+        ↓
 14. Performance improvement
- ↓
+        ↓
 15. Model-selection reasoning
- ↓
+        ↓
 16. Industry applications
- ↓
+        ↓
 17. Interview preparation
- ↓
+        ↓
 18. Mini exercise/project
- ↓
+        ↓
 19. Code review
- ↓
+        ↓
 20. Documentation
- ↓
+        ↓
 21. Git commit + push
 ```
 
@@ -111,11 +111,11 @@ A topic is considered complete only when the important parts of this workflow ha
 
 ---
 
-4. Python Prerequisite Analysis
+# 4. Python Prerequisite Analysis
 
 Before implementing an ML topic, identify the Python concepts required.
 
-Already Known
+## Already Known
 
 Concepts the learner already understands sufficiently.
 
@@ -129,7 +129,7 @@ Examples:
 - Functions
 - Basic data structures
 
-Strengthen
+## Strengthen
 
 Concepts that are known but need additional practice.
 
@@ -140,7 +140,7 @@ Examples:
 - List comprehensions
 - Matrix operations
 
-Must Learn
+## Must Learn
 
 A Python concept that directly blocks understanding of the current ML implementation.
 
@@ -154,13 +154,13 @@ Examples:
 
 If a concept is blocking progress, pause and learn it before continuing.
 
-Learn Later
+## Learn Later
 
 Useful concepts that are not necessary for the current topic.
 
 Do not allow them to derail the current learning objective.
 
-Anti-Rabbit-Hole Rule
+### Anti-Rabbit-Hole Rule
 
 When an unfamiliar Python feature appears:
 
@@ -168,49 +168,49 @@ When an unfamiliar Python feature appears:
 
 ---
 
-5. Mathematics Prerequisite Analysis
+# 5. Mathematics Prerequisite Analysis
 
-Mathematics will be taught using a just-in-time approach.
+Mathematics will be taught using a **just-in-time approach**.
 
 We learn mathematics when it becomes useful for understanding an ML concept.
 
-Required explanation order
+## Required explanation order
 
 For mathematical concepts:
 
 ```text
 Real-world intuition
- ↓
+        ↓
 Simple example
- ↓
+        ↓
 Visual interpretation
- ↓
+        ↓
 Basic mathematical notation
- ↓
+        ↓
 Formula
- ↓
+        ↓
 Connection to ML
- ↓
+        ↓
 Implementation
 ```
 
 Never begin with a complicated formula when a simple intuition can explain the idea first.
 
-Mathematics categories
+## Mathematics categories
 
-Essential Now
+### Essential Now
 
 Mathematics required to understand the current topic.
 
-Useful Soon
+### Useful Soon
 
 Mathematics likely to become important for upcoming ML topics.
 
-Learn Later
+### Learn Later
 
 Mathematics that is interesting but not currently necessary.
 
-Examples
+### Examples
 
 For Linear Regression:
 
@@ -233,40 +233,40 @@ Not required at this stage:
 
 ---
 
-6. ML Algorithm Mastery Framework
+# 6. ML Algorithm Mastery Framework
 
 Every important algorithm should eventually be understood through the following questions.
 
-6.1 Problem
+## 6.1 Problem
 
 - What problem does it solve?
 - Regression, classification, clustering, dimensionality reduction, etc.?
 - What type of target does it require?
 
-6.2 Intuition
+## 6.2 Intuition
 
 - What is the algorithm trying to accomplish?
 - Why does it work conceptually?
 - What is the simplest mental model?
 
-6.3 Mathematics
+## 6.3 Mathematics
 
 - What mathematical ideas power it?
 - What formulas actually matter?
 - Why are those formulas necessary?
 
-6.4 Assumptions
+## 6.4 Assumptions
 
 - What assumptions does the model make?
 - What happens when those assumptions are violated?
 
-6.5 From Scratch
+## 6.5 From Scratch
 
 Implement the important mechanism ourselves where practical.
 
 The goal is understanding, not reinventing every production library.
 
-6.6 Libraries
+## 6.6 Libraries
 
 Use appropriate industry-standard tools such as:
 
@@ -277,7 +277,7 @@ Use appropriate industry-standard tools such as:
 
 Later, additional libraries will be introduced when required.
 
-6.7 Visualization
+## 6.7 Visualization
 
 Use visualization when it improves understanding.
 
@@ -291,7 +291,7 @@ Examples:
 - Learning curves
 - Confusion matrices
 
-6.8 Evaluation
+## 6.8 Evaluation
 
 Understand:
 
@@ -300,7 +300,7 @@ Understand:
 - When is each metric appropriate?
 - What can make a metric misleading?
 
-6.9 Improvement
+## 6.9 Improvement
 
 Investigate model performance systematically rather than randomly changing parameters.
 
@@ -318,13 +318,13 @@ Possible improvement areas:
 - Cross-validation
 - Error analysis
 
-6.10 Failure Modes
+## 6.10 Failure Modes
 
 For every important algorithm:
 
 > When does this model perform badly, and why?
 
-6.11 Model Selection
+## 6.11 Model Selection
 
 Never memorize:
 
@@ -345,11 +345,11 @@ Instead ask:
 
 ---
 
-7. Model Evaluation Framework
+# 7. Model Evaluation Framework
 
 Evaluation must match the problem.
 
-Regression
+## Regression
 
 Important metrics include:
 
@@ -360,7 +360,7 @@ Important metrics include:
 
 We will learn what each metric means and when it is useful.
 
-Classification
+## Classification
 
 Important tools include:
 
@@ -373,11 +373,11 @@ Important tools include:
 - PR-AUC
 - Log Loss
 
-Balanced Classes
+### Balanced Classes
 
 Accuracy can be useful when class distribution is reasonably balanced, but it should not automatically be the only metric.
 
-Imbalanced Classes
+### Imbalanced Classes
 
 Accuracy can be highly misleading.
 
@@ -391,7 +391,7 @@ We will focus more on:
 
 depending on the business/problem context.
 
-Business-cost rule
+### Business-cost rule
 
 Metric selection should reflect the consequences of errors.
 
@@ -403,7 +403,7 @@ This question often determines which metric matters most.
 
 ---
 
-8. Model Improvement Framework
+# 8. Model Improvement Framework
 
 A model should not be improved by blindly changing parameters.
 
@@ -411,27 +411,27 @@ Use this sequence:
 
 ```text
 Establish baseline
- ↓
+      ↓
 Evaluate correctly
- ↓
+      ↓
 Inspect errors
- ↓
+      ↓
 Check data quality
- ↓
+      ↓
 Improve features/preprocessing
- ↓
+      ↓
 Try appropriate models
- ↓
+      ↓
 Tune hyperparameters
- ↓
+      ↓
 Cross-validation
- ↓
+      ↓
 Compare fairly
- ↓
+      ↓
 Final evaluation
 ```
 
-Hyperparameter tuning
+## Hyperparameter tuning
 
 We will learn:
 
@@ -442,7 +442,7 @@ We will learn:
 - Randomized Search.
 - Cross-validation.
 
-Critical rule
+## Critical rule
 
 A higher score on one split does not automatically mean a better model.
 
@@ -456,11 +456,11 @@ We must consider:
 
 ---
 
-9. Model Selection Framework
+# 9. Model Selection Framework
 
 When presented with a problem, do not immediately choose an algorithm.
 
-First perform problem framing.
+First perform **problem framing**.
 
 Example:
 
@@ -481,11 +481,11 @@ Ask:
 
 Only then choose and compare models.
 
-The objective is to develop model-selection reasoning, not algorithm memorization.
+The objective is to develop **model-selection reasoning**, not algorithm memorization.
 
 ---
 
-10. Industry Perspective
+# 10. Industry Perspective
 
 For important topics, answer:
 
@@ -501,19 +501,19 @@ We will gradually introduce:
 
 ```text
 Data
-↓
+ ↓
 Preprocessing
-↓
+ ↓
 Training
-↓
+ ↓
 Validation
-↓
+ ↓
 Tuning
-↓
+ ↓
 Evaluation
-↓
+ ↓
 Deployment
-↓
+ ↓
 Monitoring
 ```
 
@@ -521,43 +521,43 @@ Not every topic requires the entire production pipeline immediately.
 
 ---
 
-11. Notebook Strategy
+# 11. Notebook Strategy
 
-The physical notebook is for high-value knowledge that should remain memorable.
+The physical notebook is for **high-value knowledge that should remain memorable**.
 
 We will explicitly mark:
 
-WRITE THIS
+### WRITE THIS
 
 Important information worth writing by hand.
 
-INTUITION
+### INTUITION
 
 The mental model that makes the concept easier to remember.
 
-REMEMBER
+### REMEMBER
 
 A short rule or relationship worth retaining.
 
-COMMON MISTAKE
+### COMMON MISTAKE
 
 A misconception or error to avoid.
 
-INTERVIEW TIP
+### INTERVIEW TIP
 
 A useful interview insight.
 
-INDUSTRY TIP
+### INDUSTRY TIP
 
 A practical engineering consideration.
 
 Do not fill the notebook with every line of code or every derivation.
 
-The notebook should become a personal ML handbook, not a transcript of the course.
+The notebook should become a **personal ML handbook**, not a transcript of the course.
 
 ---
 
-12. Coding Standards
+# 12. Coding Standards
 
 Development environment:
 
@@ -587,11 +587,11 @@ Code should be written by the learner rather than blindly copied.
 
 ---
 
-13. From-Scratch vs Library Implementation
+# 13. From-Scratch vs Library Implementation
 
 Both are important, but they serve different purposes.
 
-From Scratch
+## From Scratch
 
 Purpose:
 
@@ -601,12 +601,12 @@ Example:
 
 ```python
 class LinearRegression:
- ...
+    ...
 ```
 
 using NumPy where appropriate.
 
-Library
+## Library
 
 Purpose:
 
@@ -630,27 +630,27 @@ We do not expect to reproduce the engineering complexity of mature libraries.
 
 ---
 
-14. Interview Preparation
+# 14. Interview Preparation
 
 Each major topic should eventually include:
 
-Beginner questions
+### Beginner questions
 
 Definitions and basic intuition.
 
-Intermediate questions
+### Intermediate questions
 
 Mechanisms, trade-offs, and mathematics.
 
-Practical questions
+### Practical questions
 
 Debugging, evaluation, preprocessing, and model improvement.
 
-Advanced questions
+### Advanced questions
 
 Failure modes, assumptions, optimization, and model selection.
 
-Scenario questions
+### Scenario questions
 
 Example:
 
@@ -660,19 +660,19 @@ The goal is to develop reasoning rather than memorize answers.
 
 ---
 
-15. Projects
+# 15. Projects
 
 Projects will progress in complexity.
 
 ```text
 Exercises
- ↓
+   ↓
 Mini Exercises
- ↓
+   ↓
 Mini Projects
- ↓
+   ↓
 End-to-End Projects
- ↓
+   ↓
 Portfolio Projects
 ```
 
@@ -692,7 +692,7 @@ Projects should demonstrate:
 
 ---
 
-16. Git & GitHub Workflow
+# 16. Git & GitHub Workflow
 
 Each meaningful learning milestone should be documented.
 
@@ -725,7 +725,7 @@ asdf
 
 ---
 
-17. Definition of "Mastered"
+# 17. Definition of "Mastered"
 
 A topic is not mastered merely because:
 
@@ -735,61 +735,61 @@ A topic is not mastered merely because:
 
 A topic is considered sufficiently mastered when the learner can:
 
-Explain
+### Explain
 
 Explain the concept in simple language.
 
-Understand
+### Understand
 
 Describe the intuition and important mathematics.
 
-Implement
+### Implement
 
 Write an important version from scratch.
 
-Use
+### Use
 
 Use the appropriate library correctly.
 
-Evaluate
+### Evaluate
 
 Choose appropriate metrics and interpret results.
 
-Improve
+### Improve
 
 Identify reasonable ways to improve performance.
 
-Select
+### Select
 
 Explain when to use the algorithm and when not to use it.
 
-Diagnose
+### Diagnose
 
 Identify common reasons for poor performance.
 
-Interview
+### Interview
 
 Answer conceptual, mathematical, coding, and scenario-based questions.
 
-Apply
+### Apply
 
 Use the algorithm on a meaningful dataset or project.
 
 ---
 
-18. The "Don't Get Lost" Rule
+# 18. The "Don't Get Lost" Rule
 
 When something unfamiliar appears:
 
-Ask:
+### Ask:
 
 > Is this necessary to understand the current ML concept?
 
-If yes:
+If **yes**:
 
 > Learn it now.
 
-If no:
+If **no**:
 
 > Understand enough to avoid confusion and mark it for later.
 
@@ -797,17 +797,17 @@ This prevents endless detours such as:
 
 ```text
 Linear Regression
- ↓
+    ↓
 Classes
- ↓
+    ↓
 OOP
- ↓
+    ↓
 Inheritance
- ↓
+    ↓
 Decorators
- ↓
+    ↓
 Metaclasses
- ↓
+    ↓
 ...
 ```
 
@@ -815,44 +815,44 @@ We are building ML expertise, not trying to learn the entire Python language bef
 
 ---
 
-19. Depth Over Speed
+# 19. Depth Over Speed
 
-The 100-day schedule is a roadmap, not a deadline.
+The 100-day schedule is a **roadmap, not a deadline**.
 
 If one important concept takes several study sessions to understand properly, that is acceptable.
 
 The objective is:
 
-> Become capable, not merely complete.
+> **Become capable, not merely complete.**
 
 ---
 
-20. Final Principle
+# 20. Final Principle
 
 Every major concept should answer five questions:
 
-> What is it?
+> **What is it?**
 
-> How does it work?
+> **How does it work?**
 
-> How do I implement it?
+> **How do I implement it?**
 
-> When should I use it?
+> **When should I use it?**
 
-> How do I know whether it is working well?
+> **How do I know whether it is working well?**
 
 If we can answer all five, we are learning Machine Learning rather than simply watching Machine Learning tutorials.
 
 ---
 
-Our commitment
+## Our commitment
 
 This repository will document the progression from beginner-level foundations to practical AI/ML engineering.
 
 The priority order is:
 
-Understanding → Implementation → Evaluation → Improvement → Application → Communication
+**Understanding → Implementation → Evaluation → Improvement → Application → Communication**
 
 Not:
 
-Speed → Completion → Certificates
+**Speed → Completion → Certificates**

@@ -1,6 +1,6 @@
-Simple Linear Regression
+# Simple Linear Regression
 
-Purpose
+## Purpose
 
 This document is the long-term reference for the Simple Linear Regression learning block
 in the AI-ML-Journey repository.
@@ -33,68 +33,68 @@ The dataset used for the learning example is `placement.csv`.
 
 ---
 
-Table of Contents
+## Table of Contents
 
-1. Learning Goal
-2. What Is Machine Learning?
-3. What Is Linear Regression?
-4. Simple Linear Regression
-5. The CGPA to Package Problem
-6. Important Vocabulary
-7. Mathematical Notation
-8. The Dataset
-9. Loading the Dataset
-10. Pandas Series and DataFrame
-11. Important Pandas Operations
-12. Understanding the Dataset
-13. Descriptive Statistics
-14. Mean, Median and Dispersion
-15. Standard Deviation
-16. Visualization
-17. Features and Target
-18. Why `df['cgpa']` and `df[['cgpa']]` Differ
-19. Train and Test Split
-20. X_train, X_test, y_train and y_test
-21. Training the Model
-22. What Training Means
-23. The Linear Regression Equation
-24. Slope
-25. Intercept
-26. Prediction
-27. Actual vs Predicted Values
-28. Comparison Table
-29. Residuals and Errors
-30. Mean Absolute Error
-31. Mean Squared Error
-32. Root Mean Squared Error
-33. MAE vs MSE vs RMSE
-34. Manual Metrics vs scikit-learn
-35. Floating-Point Precision
-36. R² Score
-37. The Mean Baseline
-38. SST
-39. SSE
-40. Understanding the R² Formula
-41. R² Equal to 1, 0 and Negative
-42. R² on the CGPA Dataset
-43. Adjusted R²
-44. n and k
-45. Adjusted R² Example
-46. R² vs Adjusted R²
-47. Complete Notebook Workflow
-48. Important Code Snippets
-49. Common Mistakes
-50. Mathematics Revision Sheet
-51. Interview Questions
-52. Practice Questions
-53. Six-Month Revision Checklist
-54. Learning Results
-55. Next Step
-56. Final Mental Model
+1. [Learning Goal](#1-learning-goal)
+2. [What Is Machine Learning?](#2-what-is-machine-learning)
+3. [What Is Linear Regression?](#3-what-is-linear-regression)
+4. [Simple Linear Regression](#4-simple-linear-regression)
+5. [The CGPA to Package Problem](#5-the-cgpa-to-package-problem)
+6. [Important Vocabulary](#6-important-vocabulary)
+7. [Mathematical Notation](#7-mathematical-notation)
+8. [The Dataset](#8-the-dataset)
+9. [Loading the Dataset](#9-loading-the-dataset)
+10. [Pandas Series and DataFrame](#10-pandas-series-and-dataframe)
+11. [Important Pandas Operations](#11-important-pandas-operations)
+12. [Understanding the Dataset](#12-understanding-the-dataset)
+13. [Descriptive Statistics](#13-descriptive-statistics)
+14. [Mean, Median and Dispersion](#14-mean-median-and-dispersion)
+15. [Standard Deviation](#15-standard-deviation)
+16. [Visualization](#16-visualization)
+17. [Features and Target](#17-features-and-target)
+18. [Why `df['cgpa']` and `df[['cgpa']]` Differ](#18-why-dfcgpa-and-dfcgpa-differ)
+19. [Train and Test Split](#19-train-and-test-split)
+20. [X_train, X_test, y_train and y_test](#20-x_train-x_test-y_train-and-y_test)
+21. [Training the Model](#21-training-the-model)
+22. [What Training Means](#22-what-training-means)
+23. [The Linear Regression Equation](#23-the-linear-regression-equation)
+24. [Slope](#24-slope)
+25. [Intercept](#25-intercept)
+26. [Prediction](#26-prediction)
+27. [Actual vs Predicted Values](#27-actual-vs-predicted-values)
+28. [Comparison Table](#28-comparison-table)
+29. [Residuals and Errors](#29-residuals-and-errors)
+30. [Mean Absolute Error](#30-mean-absolute-error)
+31. [Mean Squared Error](#31-mean-squared-error)
+32. [Root Mean Squared Error](#32-root-mean-squared-error)
+33. [MAE vs MSE vs RMSE](#33-mae-vs-mse-vs-rmse)
+34. [Manual Metrics vs scikit-learn](#34-manual-metrics-vs-scikit-learn)
+35. [Floating-Point Precision](#35-floating-point-precision)
+36. [R² Score](#36-r2-score)
+37. [The Mean Baseline](#37-the-mean-baseline)
+38. [SST](#38-sst)
+39. [SSE](#39-sse)
+40. [Understanding the R² Formula](#40-understanding-the-r2-formula)
+41. [R² Equal to 1, 0 and Negative](#41-r2-equal-to-1-0-and-negative)
+42. [R² on the CGPA Dataset](#42-r2-on-the-cgpa-dataset)
+43. [Adjusted R²](#43-adjusted-r2)
+44. [n and k](#44-n-and-k)
+45. [Adjusted R² Example](#45-adjusted-r2-example)
+46. [R² vs Adjusted R²](#46-r2-vs-adjusted-r2)
+47. [Complete Notebook Workflow](#47-complete-notebook-workflow)
+48. [Important Code Snippets](#48-important-code-snippets)
+49. [Common Mistakes](#49-common-mistakes)
+50. [Mathematics Revision Sheet](#50-mathematics-revision-sheet)
+51. [Interview Questions](#51-interview-questions)
+52. [Practice Questions](#52-practice-questions)
+53. [Six-Month Revision Checklist](#53-six-month-revision-checklist)
+54. [Learning Results](#54-learning-results)
+55. [Next Step](#55-next-step)
+56. [Final Mental Model](#56-final-mental-model)
 
 ---
 
-1. Learning Goal
+# 1. Learning Goal
 
 The learning example uses a small placement dataset containing `CGPA` and `Package`.
 
@@ -116,7 +116,7 @@ The real portfolio project should use a different and more realistic dataset.
 
 ---
 
-2. What Is Machine Learning?
+# 2. What Is Machine Learning?
 
 Machine Learning is a way of building systems that learn patterns from data and use
 those patterns to make predictions or decisions.
@@ -171,7 +171,7 @@ learns parameters that allow it to produce predictions.
 
 ---
 
-3. What Is Linear Regression?
+# 3. What Is Linear Regression?
 
 Linear Regression is a supervised Machine Learning algorithm used to model a
 relationship between one or more input variables and a numerical target.
@@ -193,7 +193,7 @@ CGPA -> Package
 
 A simple linear model has the form:
 
-> ŷ = mx + b
+> **ŷ = mx + b**
 
 Here:
 
@@ -207,7 +207,7 @@ The hat accent over `y` (`ŷ`) indicates a predicted or estimated value, disting
 
 ---
 
-4. Simple Linear Regression
+# 4. Simple Linear Regression
 
 "Simple" means that the model uses one input feature.
 
@@ -220,11 +220,11 @@ y = Package
 
 The model is:
 
-> ŷ = mx + b
+> **ŷ = mx + b**
 
 For our problem:
 
-> ŷ = m(CGPA) + b
+> **ŷ = m(CGPA) + b**
 
 In plain English:
 
@@ -232,7 +232,7 @@ In plain English:
 
 The model learns suitable values for `m` and `b` from the training data.
 
-What does the hat mean?
+## What does the hat mean?
 
 The notation `ŷ` (read as "y-hat") represents an estimated or predicted value. The hat accent (`ŷ`) tells us that the value is an estimate generated by the model rather than the true observed target `y`.
 
@@ -240,7 +240,7 @@ Similarly, `ȳ` (read as "y-bar") represents the arithmetic mean of the target 
 
 ---
 
-5. The CGPA to Package Problem
+# 5. The CGPA to Package Problem
 
 The dataset contains:
 
@@ -280,9 +280,9 @@ This makes the mathematics easy to understand.
 
 ---
 
-6. Important Vocabulary
+# 6. Important Vocabulary
 
-Feature
+## Feature
 
 A feature is an input variable used by the model.
 
@@ -294,7 +294,7 @@ CGPA
 
 is the feature.
 
-Target
+## Target
 
 The target is the value we want the model to predict.
 
@@ -306,7 +306,7 @@ Package
 
 is the target.
 
-Observation
+## Observation
 
 An observation is one row of data.
 
@@ -319,35 +319,35 @@ Package = 3.7
 
 represents one observation.
 
-Model
+## Model
 
 A model is the learned relationship used to make predictions.
 
 For Simple Linear Regression:
 
-> ŷ = mx + b
+> **ŷ = mx + b**
 
-Training
+## Training
 
 Training means using training data to learn the model parameters.
 
-Testing
+## Testing
 
 Testing means evaluating the trained model on data that was not used to fit the model.
 
-Prediction
+## Prediction
 
 A prediction is the output generated by the trained model for an input.
 
-Residual
+## Residual
 
 A residual is the difference between an actual value and its prediction.
 
-> eᵢ = yᵢ - ŷᵢ
+> **eᵢ = yᵢ - ŷᵢ**
 
 ---
 
-7. Mathematical Notation
+# 7. Mathematical Notation
 
 | Symbol | Meaning |
 |---|---|
@@ -367,7 +367,7 @@ A residual is the difference between an actual value and its prediction.
 
 ---
 
-8. The Dataset
+# 8. The Dataset
 
 The learning dataset contains:
 
@@ -396,7 +396,7 @@ The dataset is used to demonstrate the complete basic regression workflow.
 
 ---
 
-9. Loading the Dataset
+# 9. Loading the Dataset
 
 The notebook and dataset are now in the same directory:
 
@@ -415,7 +415,7 @@ import pandas as pd
 df = pd.read_csv("placement.csv")
 ```
 
-What does `pd.read_csv()` do?
+## What does `pd.read_csv()` do?
 
 ```python
 pd.read_csv("placement.csv")
@@ -442,12 +442,12 @@ data = pd.read_csv("placement.csv")
 
 ---
 
-10. Pandas Series and DataFrame
+# 10. Pandas Series and DataFrame
 
 Understanding Series and DataFrame is important because Machine Learning libraries
 expect data in specific shapes.
 
-Series
+## Series
 
 Selecting one column with one pair of brackets:
 
@@ -475,7 +475,7 @@ For 200 observations:
 (200,)
 ```
 
-DataFrame
+## DataFrame
 
 Selecting a column with two pairs of brackets:
 
@@ -507,9 +507,9 @@ Even though it contains only one column, it is still a two-dimensional table.
 
 ---
 
-11. Important Pandas Operations
+# 11. Important Pandas Operations
 
-`shape`
+## `shape`
 
 ```python
 df.shape
@@ -548,7 +548,7 @@ shape[0] -> rows
 shape[1] -> columns
 ```
 
-`info()`
+## `info()`
 
 ```python
 df.info()
@@ -562,7 +562,7 @@ provides structural information such as:
 - data types;
 - memory usage.
 
-`describe()`
+## `describe()`
 
 ```python
 df.describe()
@@ -570,7 +570,7 @@ df.describe()
 
 provides descriptive statistics for numerical columns.
 
-Select one column
+## Select one column
 
 ```python
 df['cgpa']
@@ -578,7 +578,7 @@ df['cgpa']
 
 Returns a Series.
 
-Select one column as a DataFrame
+## Select one column as a DataFrame
 
 ```python
 df[['cgpa']]
@@ -586,7 +586,7 @@ df[['cgpa']]
 
 Returns a DataFrame.
 
-Select multiple columns
+## Select multiple columns
 
 ```python
 df[['cgpa', 'package']]
@@ -594,7 +594,7 @@ df[['cgpa', 'package']]
 
 Returns a DataFrame.
 
-`.iloc`
+## `.iloc`
 
 `.iloc` performs integer-location based indexing.
 
@@ -632,9 +632,9 @@ df.iloc[row_position, column_position]
 
 ---
 
-12. Understanding the Dataset
+# 12. Understanding the Dataset
 
-`shape`
+## `shape`
 
 ```python
 df.shape
@@ -644,7 +644,7 @@ answers:
 
 > How many rows and columns are present?
 
-`info()`
+## `info()`
 
 ```python
 df.info()
@@ -657,7 +657,7 @@ answers questions such as:
 - What are the data types?
 - How many rows exist?
 
-`describe()`
+## `describe()`
 
 ```python
 df.describe()
@@ -686,17 +686,17 @@ increase.
 
 ---
 
-13. Descriptive Statistics
+# 13. Descriptive Statistics
 
-Count
+## Count
 
 Count tells us how many non-missing observations are present.
 
-Mean
+## Mean
 
 The arithmetic mean is:
 
-> \bar{x} = (Σ  xᵢ / n)
+> **\bar{x} = (Σ  xᵢ / n)**
 
 For:
 
@@ -706,9 +706,9 @@ For:
 
 the mean is:
 
-> \bar{x} = (25 / 5) = 5
+> **\bar{x} = (25 / 5) = 5**
 
-Median
+## Median
 
 The median is the middle value after sorting.
 
@@ -728,17 +728,17 @@ For:
 
 the median is:
 
-> (2+3 / 2) = 2.5
+> **(2+3 / 2) = 2.5**
 
-Minimum
+## Minimum
 
 The smallest value.
 
-Maximum
+## Maximum
 
 The largest value.
 
-Quartiles
+## Quartiles
 
 ```text
 25% -> Q1
@@ -748,7 +748,7 @@ Quartiles
 
 ---
 
-14. Mean, Median and Dispersion
+# 14. Mean, Median and Dispersion
 
 Consider:
 
@@ -783,7 +783,7 @@ Measures such as standard deviation describe dispersion.
 
 ---
 
-15. Standard Deviation
+# 15. Standard Deviation
 
 Standard deviation is a measure of how spread out observations are around their mean.
 
@@ -807,7 +807,7 @@ is exactly one standard deviation away from the mean.
 
 ---
 
-16. Visualization
+# 16. Visualization
 
 We used Matplotlib:
 
@@ -827,7 +827,7 @@ plt.title('CGPA vs Package')
 plt.show()
 ```
 
-What does each command do?
+## What does each command do?
 
 ```python
 plt.xlabel('CGPA')
@@ -861,7 +861,7 @@ displays the plot.
 
 ---
 
-17. Features and Target
+# 17. Features and Target
 
 For our model:
 
@@ -870,7 +870,7 @@ X = df[['cgpa']]
 y = df['package']
 ```
 
-X
+## X
 
 `X` contains the input feature.
 
@@ -880,7 +880,7 @@ Here:
 CGPA
 ```
 
-y
+## y
 
 `y` contains the target.
 
@@ -909,11 +909,11 @@ The actual target values are represented by `y`.
 
 ---
 
-18. Why `df['cgpa']` and `df[['cgpa']]` Differ
+# 18. Why `df['cgpa']` and `df[['cgpa']]` Differ
 
 This is one of the most important Pandas concepts from the learning process.
 
-One pair of brackets
+## One pair of brackets
 
 ```python
 df['cgpa']
@@ -929,7 +929,7 @@ Its shape is:
 
 This means 200 values in one dimension.
 
-Two pairs of brackets
+## Two pairs of brackets
 
 ```python
 df[['cgpa']]
@@ -945,7 +945,7 @@ Its shape is:
 
 This means 200 rows and one feature in two dimensions.
 
-Why does this matter?
+## Why does this matter?
 
 Machine Learning libraries commonly represent features as a matrix with the shape:
 
@@ -984,7 +984,7 @@ with shape:
 (200,)
 ```
 
-Visual memory
+## Visual memory
 
 ```text
 df['cgpa']
@@ -1013,7 +1013,7 @@ df[['cgpa']]
 
 ---
 
-19. Train and Test Split
+# 19. Train and Test Split
 
 We used:
 
@@ -1046,7 +1046,7 @@ Training -> 160 observations
 Testing  -> 40 observations
 ```
 
-Why split the data?
+## Why split the data?
 
 The model should be evaluated on observations it did not use during training.
 
@@ -1081,7 +1081,7 @@ The better explanation is:
 
 ---
 
-20. X_train, X_test, y_train and y_test
+# 20. X_train, X_test, y_train and y_test
 
 | Variable | Meaning |
 |---|---|
@@ -1113,7 +1113,7 @@ Model predictions
 
 ---
 
-21. Training the Model
+# 21. Training the Model
 
 Import Linear Regression:
 
@@ -1137,7 +1137,7 @@ The important idea is that `model.fit()` learns from the training data.
 
 ---
 
-22. What Training Means
+# 22. What Training Means
 
 When we write:
 
@@ -1157,7 +1157,7 @@ b -> intercept
 
 The resulting model has the form:
 
-> ŷ = mx + b
+> **ŷ = mx + b**
 
 Training should not be thought of as human-style memorization.
 
@@ -1168,11 +1168,11 @@ sum of squared residuals on the training data.
 
 ---
 
-23. The Linear Regression Equation
+# 23. The Linear Regression Equation
 
 The basic equation is:
 
-> ŷ = mx + b
+> **ŷ = mx + b**
 
 Where:
 
@@ -1183,7 +1183,7 @@ Where:
 
 For our problem:
 
-> ŷ = m(CGPA) + b
+> **ŷ = m(CGPA) + b**
 
 In plain English:
 
@@ -1193,14 +1193,14 @@ The model learns `m` and `b`.
 
 ---
 
-24. Slope
+# 24. Slope
 
 The slope tells us how much the predicted output changes when the input increases by one
 unit.
 
 For example, if:
 
-> m = 0.5
+> **m = 0.5**
 
 then increasing CGPA by one point changes the predicted package by 0.5 package units
 according to the fitted line.
@@ -1226,25 +1226,25 @@ Important:
 
 ---
 
-25. Intercept
+# 25. Intercept
 
 The intercept is the predicted target when the input is zero.
 
 Set:
 
-> x=0
+> **x=0**
 
 in:
 
-> ŷ=mx+b
+> **ŷ=mx+b**
 
 Then:
 
-> ŷ=m(0)+b
+> **ŷ=m(0)+b**
 
 Therefore:
 
-> ŷ=b
+> **ŷ=b**
 
 The intercept does not always have a useful real-world interpretation.
 
@@ -1253,7 +1253,7 @@ as a real-world package at CGPA 0 may not be meaningful.
 
 ---
 
-26. Prediction
+# 26. Prediction
 
 After training:
 
@@ -1299,7 +1299,7 @@ y_test
 
 ---
 
-27. Actual vs Predicted Values
+# 27. Actual vs Predicted Values
 
 We have:
 
@@ -1332,7 +1332,7 @@ The difference between actual and predicted values is the residual.
 
 ---
 
-28. Comparison Table
+# 28. Comparison Table
 
 We created a DataFrame to compare actual and predicted values:
 
@@ -1345,17 +1345,17 @@ comparison = pd.DataFrame({
 print(comparison)
 ```
 
-`pd.DataFrame(...)`
+## `pd.DataFrame(...)`
 
 Creates a Pandas DataFrame and stores it in `comparison`.
 
-`y_test.values`
+## `y_test.values`
 
 Creates the `Actual` column from the actual test target values.
 
 `y_test` is a Pandas Series. `.values` extracts its underlying array-like values.
 
-`y_pred`
+## `y_pred`
 
 Creates the `Predicted` column.
 
@@ -1367,7 +1367,7 @@ In general, `y_pred.values` would fail because NumPy arrays do not have the same
 
 ---
 
-29. Residuals and Errors
+# 29. Residuals and Errors
 
 We created:
 
@@ -1417,17 +1417,17 @@ Zero     -> exact prediction
 
 The mathematical definition is:
 
-> eᵢ = yᵢ - ŷᵢ
+> **eᵢ = yᵢ - ŷᵢ**
 
 ---
 
-30. Mean Absolute Error
+# 30. Mean Absolute Error
 
 MAE means Mean Absolute Error.
 
 The formula is:
 
-> MAE = (1/n) · Σ |yᵢ-ŷᵢ|
+> **MAE = (1/n) · Σ |yᵢ-ŷᵢ|**
 
 In simple words:
 
@@ -1436,7 +1436,7 @@ In simple words:
 3. Add the absolute errors.
 4. Divide by the number of observations.
 
-Example
+## Example
 
 Suppose the errors are:
 
@@ -1452,13 +1452,13 @@ Absolute errors:
 
 Sum:
 
-> 2+5+3+4=14
+> **2+5+3+4=14**
 
 MAE:
 
-> MAE=(14 / 4)=3.5
+> **MAE=(14 / 4)=3.5**
 
-Why absolute value?
+## Why absolute value?
 
 Without absolute value, positive and negative errors could cancel.
 
@@ -1472,7 +1472,7 @@ That would incorrectly suggest zero average error.
 
 MAE prevents this cancellation.
 
-Interpretation
+## Interpretation
 
 If:
 
@@ -1484,7 +1484,7 @@ the average absolute prediction error is about 0.23 target units.
 
 MAE is easy to interpret because it is expressed in the original target units.
 
-scikit-learn
+## scikit-learn
 
 ```python
 from sklearn.metrics import mean_absolute_error
@@ -1495,13 +1495,13 @@ print(mae)
 
 ---
 
-31. Mean Squared Error
+# 31. Mean Squared Error
 
 MSE means Mean Squared Error.
 
 The formula is:
 
-> MSE=(1/n) · Σ (yᵢ-ŷᵢ)²
+> **MSE=(1/n) · Σ (yᵢ-ŷᵢ)²**
 
 Steps:
 
@@ -1510,7 +1510,7 @@ Steps:
 3. Add the squared errors.
 4. Divide by the number of observations.
 
-Example
+## Example
 
 Errors:
 
@@ -1526,33 +1526,33 @@ Squared errors:
 
 Sum:
 
-> 4+25+9+16=54
+> **4+25+9+16=54**
 
 MSE:
 
-> MSE=(54 / 4)=13.5
+> **MSE=(54 / 4)=13.5**
 
-Why square the errors?
+## Why square the errors?
 
 Squaring does two important things.
 
-1. It removes the sign
+### 1. It removes the sign
 
 Both `-5` and `5` become `25` after squaring.
 
-2. It gives larger errors more influence
+### 2. It gives larger errors more influence
 
 For example:
 
-> 2²=4
+> **2²=4**
 
 while:
 
-> 5²=25
+> **5²=25**
 
 Therefore, MSE is more sensitive to large errors than MAE.
 
-scikit-learn
+## scikit-learn
 
 ```python
 from sklearn.metrics import mean_squared_error
@@ -1563,25 +1563,25 @@ print(mse)
 
 ---
 
-32. Root Mean Squared Error
+# 32. Root Mean Squared Error
 
 RMSE means Root Mean Squared Error.
 
 The formula is:
 
-> RMSE=√{MSE}
+> **RMSE=√{MSE}**
 
 For the previous example:
 
-> MSE=13.5
+> **MSE=13.5**
 
 Therefore:
 
-> RMSE=√{13.5}
+> **RMSE=√{13.5}**
 
-> RMSE\approx3.6742
+> **RMSE\approx3.6742**
 
-Why take the square root?
+## Why take the square root?
 
 MSE is expressed in squared target units.
 
@@ -1591,7 +1591,7 @@ Taking the square root brings the metric back to the original target units.
 
 This makes RMSE easier to interpret.
 
-Python
+## Python
 
 ```python
 rmse = np.sqrt(mse)
@@ -1600,7 +1600,7 @@ print(rmse)
 
 ---
 
-33. MAE vs MSE vs RMSE
+# 33. MAE vs MSE vs RMSE
 
 | Metric | Main operation | Large errors | Original units |
 |---|---|---|---|
@@ -1632,7 +1632,7 @@ what types of errors matter.
 
 ---
 
-34. Manual Metrics vs scikit-learn
+# 34. Manual Metrics vs scikit-learn
 
 We manually calculated the metrics to understand their mathematics.
 
@@ -1660,7 +1660,7 @@ The difference was:
 
 This verifies that our manual calculation matches the library calculation.
 
-Why use scikit-learn in real projects?
+## Why use scikit-learn in real projects?
 
 Because it is:
 
@@ -1669,7 +1669,7 @@ Because it is:
 - concise;
 - less error-prone than repeatedly writing metric formulas manually.
 
-Why learn the manual calculation?
+## Why learn the manual calculation?
 
 Because understanding the mathematics helps us:
 
@@ -1684,7 +1684,7 @@ The goal is to understand what the function is doing.
 
 ---
 
-35. Floating-Point Precision
+# 35. Floating-Point Precision
 
 When manual R² and scikit-learn R² were compared, the results were:
 
@@ -1726,13 +1726,13 @@ Do not interpret a difference around `1e-16` as meaningful model error.
 
 ---
 
-36. R² Score
+# 36. R² Score
 
 R² is called the coefficient of determination.
 
 The formula is:
 
-> R²=1-(SSE / SST)
+> **R²=1-(SSE / SST)**
 
 R² compares the model against a simple baseline that predicts the mean of the target.
 
@@ -1749,7 +1749,7 @@ R² is not ordinary classification accuracy.
 
 ---
 
-37. The Mean Baseline
+# 37. The Mean Baseline
 
 Suppose the actual values are:
 
@@ -1759,7 +1759,7 @@ Suppose the actual values are:
 
 The mean is:
 
-> ȳ=(10+20+30+40 / 4)=25
+> **ȳ=(10+20+30+40 / 4)=25**
 
 A simple baseline can predict the mean for every observation:
 
@@ -1775,13 +1775,13 @@ strategy.
 
 ---
 
-38. SST
+# 38. SST
 
 SST means Total Sum of Squares.
 
 The formula is:
 
-> SST=Σ (yᵢ-ȳ)²
+> **SST=Σ (yᵢ-ȳ)²**
 
 It measures the total squared variation of the actual target values around their mean.
 
@@ -1794,13 +1794,13 @@ Mean   = 25
 
 we calculate:
 
-> (10-25)²+(20-25)²+(30-25)²+(40-25)²
+> **(10-25)²+(20-25)²+(30-25)²+(40-25)²**
 
-> =225+25+25+225
+> **=225+25+25+225**
 
 Therefore:
 
-> SST=500
+> **SST=500**
 
 Python:
 
@@ -1815,13 +1815,13 @@ Read this as:
 
 ---
 
-39. SSE
+# 39. SSE
 
 SSE means Sum of Squared Errors.
 
 The formula is:
 
-> SSE=Σ (yᵢ-ŷᵢ)²
+> **SSE=Σ (yᵢ-ŷᵢ)²**
 
 It measures the total squared prediction error made by the model.
 
@@ -1848,11 +1848,11 @@ SSE -> squared error of our model
 
 ---
 
-40. Understanding the R² Formula
+# 40. Understanding the R² Formula
 
 The formula is:
 
-> R²=1-(SSE / SST)
+> **R²=1-(SSE / SST)**
 
 Remember:
 
@@ -1863,43 +1863,43 @@ SSE -> model error
 
 So R² asks how much of the baseline error the model eliminates.
 
-If the model is perfect
+## If the model is perfect
 
 If:
 
-> SSE=0
+> **SSE=0**
 
 then:
 
-> R²=1
+> **R²=1**
 
-If the model equals the mean baseline
+## If the model equals the mean baseline
 
 If:
 
-> SSE=SST
+> **SSE=SST**
 
 then:
 
-> R²=0
+> **R²=0**
 
-If the model is worse than the baseline
+## If the model is worse than the baseline
 
 If:
 
-> SSE>SST
+> **SSE>SST**
 
 then:
 
-> R²<0
+> **R²<0**
 
 This is why R² can be negative.
 
 ---
 
-41. R² Equal to 1, 0 and Negative
+# 41. R² Equal to 1, 0 and Negative
 
-R² = 1
+## R² = 1
 
 Suppose:
 
@@ -1915,17 +1915,17 @@ Every prediction is exact.
 
 Therefore:
 
-> SSE=0
+> **SSE=0**
 
 and:
 
-> R²=1
+> **R²=1**
 
 Interpretation:
 
 > Perfect predictions for the evaluated observations.
 
-R² = 0
+## R² = 0
 
 Suppose the mean is 25 and the model predicts:
 
@@ -1937,17 +1937,17 @@ This is exactly the mean baseline.
 
 Therefore:
 
-> SSE=SST
+> **SSE=SST**
 
 and:
 
-> R²=0
+> **R²=0**
 
 Interpretation:
 
 > The model performs no better than the mean baseline under the R² definition.
 
-Negative R²
+## Negative R²
 
 Suppose:
 
@@ -1961,23 +1961,23 @@ Predicted:
 
 We get:
 
-> SSE=3000
+> **SSE=3000**
 
 and:
 
-> SST=500
+> **SST=500**
 
 Therefore:
 
-> R²=1-(3000 / 500)
+> **R²=1-(3000 / 500)**
 
-> R²=-5
+> **R²=-5**
 
 Interpretation:
 
 > The model performs worse than the mean baseline.
 
-Important
+## Important
 
 Do not say:
 
@@ -1995,7 +1995,7 @@ That is not a correct interpretation.
 
 ---
 
-42. R² on the CGPA Dataset
+# 42. R² on the CGPA Dataset
 
 Our CGPA to Package model produced approximately:
 
@@ -2017,7 +2017,7 @@ These values are effectively identical.
 
 Rounded:
 
-> R²\approx0.7731
+> **R²\approx0.7731**
 
 Interpretation:
 
@@ -2030,16 +2030,16 @@ This does not mean:
 
 ---
 
-43. Adjusted R²
+# 43. Adjusted R²
 
 Adjusted R² modifies R² by accounting for the number of predictors in the model.
 
 The formula is:
 
-> R²_{\mathrm{adj}}
+> **R²_{\mathrm{adj}}
 =
 1-
-((1-R²)(n-1) / n-1-k)
+((1-R²)(n-1) / n-1-k)**
 
 The intuition is:
 
@@ -2065,11 +2065,11 @@ This makes it useful when comparing models with different numbers of predictors.
 
 ---
 
-44. n and k
+# 44. n and k
 
 These symbols are important.
 
-n
+## n
 
 `n` is the number of observations used in the calculation.
 
@@ -2081,9 +2081,9 @@ For example:
 
 means:
 
-> n=5
+> **n=5**
 
-k
+## k
 
 `k` is the number of predictors or input features.
 
@@ -2095,7 +2095,7 @@ CGPA + Age -> Package
 
 there are two predictors:
 
-> k=2
+> **k=2**
 
 For:
 
@@ -2105,62 +2105,62 @@ CGPA -> Package
 
 there is one predictor:
 
-> k=1
+> **k=1**
 
-Our evaluation
+## Our evaluation
 
 Our test set contained 40 observations.
 
 Therefore:
 
-> n=40
+> **n=40**
 
 Our model had one predictor, CGPA.
 
 Therefore:
 
-> k=1
+> **k=1**
 
 ---
 
-45. Adjusted R² Example
+# 45. Adjusted R² Example
 
 Suppose:
 
-> R²=0.80,\quad n=10,\quad k=2
+> **R²=0.80,\quad n=10,\quad k=2**
 
 The formula is:
 
-> R²_{\mathrm{adj}}
+> **R²_{\mathrm{adj}}
 =
 1-
-((1-0.80)(10-1) / 10-1-2)
+((1-0.80)(10-1) / 10-1-2)**
 
 Simplify:
 
-> =1-(0.20 × 9 / 7)
+> **=1-(0.20 × 9 / 7)**
 
-> =1-(1.8 / 7)
+> **=1-(1.8 / 7)**
 
 Therefore:
 
-> R²_{\mathrm{adj}}\approx0.742857
+> **R²_{\mathrm{adj}}\approx0.742857**
 
 Now keep:
 
-> R²=0.80,\quad n=10
+> **R²=0.80,\quad n=10**
 
 but increase the number of predictors to:
 
-> k=3
+> **k=3**
 
 Then:
 
-> R²_{\mathrm{adj}}=0.70
+> **R²_{\mathrm{adj}}=0.70**
 
 This demonstrates the complexity penalty.
 
-Important nuance
+## Important nuance
 
 Do not say:
 
@@ -2175,7 +2175,7 @@ It can also increase when the added feature provides enough improvement.
 
 ---
 
-46. R² vs Adjusted R²
+# 46. R² vs Adjusted R²
 
 | R² | Adjusted R² |
 |---|---|
@@ -2201,7 +2201,7 @@ for the number of predictors?
 
 ---
 
-47. Complete Notebook Workflow
+# 47. Complete Notebook Workflow
 
 The learning notebook follows this workflow:
 
@@ -2279,9 +2279,9 @@ Apply ML workflow
 
 ---
 
-48. Important Code Snippets
+# 48. Important Code Snippets
 
-Import libraries
+## Import libraries
 
 ```python
 import numpy as np
@@ -2289,13 +2289,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 ```
 
-Load CSV
+## Load CSV
 
 ```python
 df = pd.read_csv("placement.csv")
 ```
 
-Dimensions
+## Dimensions
 
 ```python
 df.shape
@@ -2303,38 +2303,38 @@ df.shape[0]  # rows
 df.shape[1]  # columns
 ```
 
-Information
+## Information
 
 ```python
 df.info()
 ```
 
-Statistics
+## Statistics
 
 ```python
 df.describe()
 ```
 
-Select one column
+## Select one column
 
 ```python
 df['cgpa']
 ```
 
-Select a column as a DataFrame
+## Select a column as a DataFrame
 
 ```python
 df[['cgpa']]
 ```
 
-Features and target
+## Features and target
 
 ```python
 X = df[['cgpa']]
 y = df['package']
 ```
 
-Train/test split
+## Train/test split
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -2347,7 +2347,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
-Create model
+## Create model
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -2355,19 +2355,19 @@ from sklearn.linear_model import LinearRegression
 model = LinearRegression()
 ```
 
-Train
+## Train
 
 ```python
 model.fit(X_train, y_train)
 ```
 
-Predict
+## Predict
 
 ```python
 y_pred = model.predict(X_test)
 ```
 
-Inspect learned parameters
+## Inspect learned parameters
 
 ```python
 print(model.coef_)
@@ -2381,7 +2381,7 @@ model.coef_[0] -> slope
 model.intercept_ -> intercept
 ```
 
-Comparison
+## Comparison
 
 ```python
 comparison = pd.DataFrame({
@@ -2390,7 +2390,7 @@ comparison = pd.DataFrame({
 })
 ```
 
-Error
+## Error
 
 ```python
 comparison['Error'] = (
@@ -2398,7 +2398,7 @@ comparison['Error'] = (
 )
 ```
 
-Absolute Error
+## Absolute Error
 
 ```python
 comparison['Absolute Error'] = (
@@ -2406,7 +2406,7 @@ comparison['Absolute Error'] = (
 )
 ```
 
-Squared Error
+## Squared Error
 
 ```python
 comparison['Squared Error'] = (
@@ -2414,7 +2414,7 @@ comparison['Squared Error'] = (
 )
 ```
 
-MAE
+## MAE
 
 ```python
 from sklearn.metrics import mean_absolute_error
@@ -2422,7 +2422,7 @@ from sklearn.metrics import mean_absolute_error
 mae = mean_absolute_error(y_test, y_pred)
 ```
 
-MSE
+## MSE
 
 ```python
 from sklearn.metrics import mean_squared_error
@@ -2430,13 +2430,13 @@ from sklearn.metrics import mean_squared_error
 mse = mean_squared_error(y_test, y_pred)
 ```
 
-RMSE
+## RMSE
 
 ```python
 rmse = np.sqrt(mse)
 ```
 
-R²
+## R²
 
 ```python
 from sklearn.metrics import r2_score
@@ -2444,7 +2444,7 @@ from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_pred)
 ```
 
-Adjusted R²
+## Adjusted R²
 
 ```python
 n = len(y_test)
@@ -2458,9 +2458,9 @@ adjusted_r2 = 1 - (
 
 ---
 
-49. Common Mistakes
+# 49. Common Mistakes
 
-Mistake 1: Confusing Series and DataFrame
+## Mistake 1: Confusing Series and DataFrame
 
 ```python
 df['cgpa']
@@ -2481,7 +2481,7 @@ Remember:
 (200, 1)  -> two-dimensional
 ```
 
-Mistake 2: Thinking `y_test` is the prediction
+## Mistake 2: Thinking `y_test` is the prediction
 
 Wrong:
 
@@ -2497,7 +2497,7 @@ y_test -> actual unseen target values
 y_pred -> model predictions
 ```
 
-Mistake 3: Calling R² accuracy
+## Mistake 3: Calling R² accuracy
 
 Wrong:
 
@@ -2508,7 +2508,7 @@ Better:
 > R² = 0.77 means the model explains approximately 77% of the variation relative to the
 > mean baseline for that evaluation.
 
-Mistake 4: Thinking one zero error means the whole model has zero error
+## Mistake 4: Thinking one zero error means the whole model has zero error
 
 If one observation has:
 
@@ -2520,46 +2520,46 @@ that prediction is perfect.
 
 It does not mean the entire model has zero error.
 
-Mistake 5: Forgetting why MSE squares errors
+## Mistake 5: Forgetting why MSE squares errors
 
 Squaring prevents positive and negative errors from cancelling and gives larger errors
 more influence.
 
-Mistake 6: Thinking RMSE is unrelated to MSE
+## Mistake 6: Thinking RMSE is unrelated to MSE
 
 RMSE is simply:
 
-> RMSE=√{MSE}
+> **RMSE=√{MSE}**
 
-Mistake 7: Thinking negative R² is impossible
+## Mistake 7: Thinking negative R² is impossible
 
 Negative R² is possible.
 
 It means the model performs worse than the mean baseline under the R² definition.
 
-Mistake 8: Misinterpreting standard deviation
+## Mistake 8: Misinterpreting standard deviation
 
 Standard deviation measures overall spread. It does not mean every observation is
 exactly that distance from the mean.
 
-Mistake 9: Confusing n and k
+## Mistake 9: Confusing n and k
 
 ```text
 n -> number of observations
 k -> number of predictors
 ```
 
-Mistake 10: Evaluating only training data
+## Mistake 10: Evaluating only training data
 
 Training performance alone does not tell us how well the model generalizes to unseen
 observations.
 
-Mistake 11: Treating correlation as causation
+## Mistake 11: Treating correlation as causation
 
 A positive relationship between CGPA and package does not prove that increasing CGPA
 causes package to increase.
 
-Mistake 12: Assuming a high R² automatically means a good model
+## Mistake 12: Assuming a high R² automatically means a good model
 
 A model can have a high R² and still be unsuitable for a particular business problem.
 
@@ -2574,56 +2574,56 @@ Evaluation must consider:
 
 ---
 
-50. Mathematics Revision Sheet
+# 50. Mathematics Revision Sheet
 
-Mean
+## Mean
 
-> \bar{x}=(Σ  xᵢ / n)
+> **\bar{x}=(Σ  xᵢ / n)**
 
-Linear equation
+## Linear equation
 
-> y=mx+b
+> **y=mx+b**
 
-Prediction
+## Prediction
 
-> ŷ=mx+b
+> **ŷ=mx+b**
 
-Residual
+## Residual
 
-> eᵢ=yᵢ-ŷᵢ
+> **eᵢ=yᵢ-ŷᵢ**
 
-MAE
+## MAE
 
-> MAE=(1/n) · Σ |yᵢ-ŷᵢ|
+> **MAE=(1/n) · Σ |yᵢ-ŷᵢ|**
 
-MSE
+## MSE
 
-> MSE=(1/n) · Σ (yᵢ-ŷᵢ)²
+> **MSE=(1/n) · Σ (yᵢ-ŷᵢ)²**
 
-RMSE
+## RMSE
 
-> RMSE=√{MSE}
+> **RMSE=√{MSE}**
 
-SST
+## SST
 
-> SST=Σ (yᵢ-ȳ)²
+> **SST=Σ (yᵢ-ȳ)²**
 
-SSE
+## SSE
 
-> SSE=Σ (yᵢ-ŷᵢ)²
+> **SSE=Σ (yᵢ-ŷᵢ)²**
 
-R²
+## R²
 
-> R²=1-(SSE / SST)
+> **R²=1-(SSE / SST)**
 
-Adjusted R²
+## Adjusted R²
 
-> R²_{\mathrm{adj}}
+> **R²_{\mathrm{adj}}
 =
 1-
-((1-R²)(n-1) / n-1-k)
+((1-R²)(n-1) / n-1-k)**
 
-Mathematics habit
+## Mathematics habit
 
 Do not memorize formulas without understanding the symbols.
 
@@ -2641,15 +2641,15 @@ What is being compared?
 
 ---
 
-51. Interview Questions
+# 51. Interview Questions
 
-Q1. What is Linear Regression?
+## Q1. What is Linear Regression?
 
 Linear Regression is a supervised learning algorithm used to model the relationship
 between one or more input variables and a continuous numerical target using a linear
 equation.
 
-Q2. What is Simple Linear Regression?
+## Q2. What is Simple Linear Regression?
 
 Linear Regression with one input feature.
 
@@ -2659,131 +2659,131 @@ Example:
 CGPA -> Package
 ```
 
-Q3. What is the equation of Simple Linear Regression?
+## Q3. What is the equation of Simple Linear Regression?
 
-> ŷ=mx+b
+> **ŷ=mx+b**
 
 where `m` is slope and `b` is intercept.
 
-Q4. What is a feature?
+## Q4. What is a feature?
 
 A feature is an input variable used by the model to make predictions.
 
-Q5. What is the target?
+## Q5. What is the target?
 
 The target is the output variable the model is trying to predict.
 
-Q6. Why do we split data into train and test sets?
+## Q6. Why do we split data into train and test sets?
 
 To train the model on one portion of the data and evaluate its ability to generalize to
 unseen observations.
 
-Q7. What is `X_train`?
+## Q7. What is `X_train`?
 
 The input features used to train the model.
 
-Q8. What is `y_train`?
+## Q8. What is `y_train`?
 
 The actual target values corresponding to the training inputs.
 
-Q9. What is `X_test`?
+## Q9. What is `X_test`?
 
 The input features held out for testing.
 
-Q10. What is `y_test`?
+## Q10. What is `y_test`?
 
 The actual target values corresponding to the test inputs.
 
-Q11. What is `y_pred`?
+## Q11. What is `y_pred`?
 
 The predictions generated by the trained model for the test inputs.
 
-Q12. Why use a scatter plot for CGPA vs Package?
+## Q12. Why use a scatter plot for CGPA vs Package?
 
 Because we want to visualize the relationship between two numerical variables.
 
-Q13. What is MAE?
+## Q13. What is MAE?
 
 Mean Absolute Error. It is the average absolute difference between actual and predicted
 values.
 
-Q14. What is MSE?
+## Q14. What is MSE?
 
 Mean Squared Error. It is the average squared difference between actual and predicted
 values.
 
-Q15. Why does MSE penalize large errors more?
+## Q15. Why does MSE penalize large errors more?
 
 Because errors are squared. Larger errors therefore grow faster.
 
-Q16. Why use RMSE?
+## Q16. Why use RMSE?
 
 RMSE is the square root of MSE, which brings the metric back to the original target
 units.
 
-Q17. Which is more sensitive to large errors, MAE or MSE?
+## Q17. Which is more sensitive to large errors, MAE or MSE?
 
 MSE is more sensitive because it squares the errors.
 
-Q18. What is R²?
+## Q18. What is R²?
 
 R² measures how much variation in the target is explained by the model relative to a
 mean baseline.
 
-Q19. Can R² be negative?
+## Q19. Can R² be negative?
 
 Yes. Negative R² means the model performs worse than the mean baseline under the R²
 definition.
 
-Q20. What does R² = 1 mean?
+## Q20. What does R² = 1 mean?
 
 Perfect predictions for the evaluated observations.
 
-Q21. What does R² = 0 mean?
+## Q21. What does R² = 0 mean?
 
 The model performs no better than the mean baseline under the R² definition.
 
-Q22. Is R² accuracy?
+## Q22. Is R² accuracy?
 
 No. R² should not simply be called prediction accuracy.
 
-Q23. What is Adjusted R²?
+## Q23. What is Adjusted R²?
 
 Adjusted R² modifies R² by accounting for the number of predictors.
 
-Q24. What are n and k?
+## Q24. What are n and k?
 
 ```text
 n = number of observations
 k = number of predictors
 ```
 
-Q25. Why is Adjusted R² useful?
+## Q25. Why is Adjusted R² useful?
 
 It helps compare models while accounting for the number of predictors.
 
-Q26. Does adding a feature always decrease Adjusted R²?
+## Q26. Does adding a feature always decrease Adjusted R²?
 
 No. It decreases when the added feature does not improve the model enough to justify the
 additional complexity.
 
-Q27. Why can ordinary R² increase when predictors are added?
+## Q27. Why can ordinary R² increase when predictors are added?
 
 Ordinary R² does not decrease simply because additional predictors are included.
 
-Q28. Why did manual R² match scikit-learn?
+## Q28. Why did manual R² match scikit-learn?
 
 Because both calculations use the same underlying mathematical definition.
 
-Q29. Why can two mathematically equivalent calculations differ by `1e-16`?
+## Q29. Why can two mathematically equivalent calculations differ by `1e-16`?
 
 Because of floating-point representation and numerical precision.
 
-Q30. What is the difference between `df['cgpa']` and `df[['cgpa']]`?
+## Q30. What is the difference between `df['cgpa']` and `df[['cgpa']]`?
 
 The first generally returns a Series. The second returns a one-column DataFrame.
 
-Q31. Why does scikit-learn expect X to be two-dimensional?
+## Q31. Why does scikit-learn expect X to be two-dimensional?
 
 Features are represented as a matrix with the shape:
 
@@ -2797,30 +2797,30 @@ Even one feature therefore has a shape such as:
 (200, 1)
 ```
 
-Q32. What is the difference between `y_test` and `y_pred`?
+## Q32. What is the difference between `y_test` and `y_pred`?
 
 `y_test` contains actual target values. `y_pred` contains predictions generated by the
 model.
 
-Q33. What does `model.fit()` do?
+## Q33. What does `model.fit()` do?
 
 It estimates the model parameters from the training data.
 
-Q34. What does `model.predict()` do?
+## Q34. What does `model.predict()` do?
 
 It uses the learned model parameters to generate predictions for new input observations.
 
-Q35. Does Linear Regression prove causation?
+## Q35. Does Linear Regression prove causation?
 
 No. A fitted relationship does not by itself prove that one variable causes another.
 
 ---
 
-52. Practice Questions
+# 52. Practice Questions
 
 These are the exercises used during the learning process.
 
-Practice 1: Shape
+## Practice 1: Shape
 
 Suppose a DataFrame has:
 
@@ -2835,13 +2835,13 @@ What does this return?
 df.shape[1]
 ```
 
-Answer
+### Answer
 
 ```text
 20
 ```
 
-Practice 2: Missing Values
+## Practice 2: Missing Values
 
 Suppose there are:
 
@@ -2852,11 +2852,11 @@ Suppose there are:
 
 How many non-missing age values are there?
 
-Answer
+### Answer
 
-> 1000-50=950
+> **1000-50=950**
 
-Practice 3: Mean
+## Practice 3: Mean
 
 Given:
 
@@ -2866,11 +2866,11 @@ Given:
 
 What is the mean?
 
-Answer
+### Answer
 
-> 5
+> **5**
 
-Practice 4: Dispersion
+## Practice 4: Dispersion
 
 Dataset A:
 
@@ -2886,11 +2886,11 @@ Dataset B:
 
 Which has greater dispersion?
 
-Answer
+### Answer
 
 Dataset B.
 
-Practice 5: MAE
+## Practice 5: MAE
 
 Errors:
 
@@ -2906,11 +2906,11 @@ Absolute errors:
 
 Calculate MAE.
 
-Answer
+### Answer
 
-> MAE=(2+5+3+4 / 4)=3.5
+> **MAE=(2+5+3+4 / 4)=3.5**
 
-Practice 6: MSE
+## Practice 6: MSE
 
 Squared errors:
 
@@ -2920,23 +2920,23 @@ Squared errors:
 
 Calculate MSE.
 
-Answer
+### Answer
 
-> MSE=(4+25+9+16 / 4)=13.5
+> **MSE=(4+25+9+16 / 4)=13.5**
 
-Practice 7: RMSE
+## Practice 7: RMSE
 
 Given:
 
-> MSE=13.5
+> **MSE=13.5**
 
 Calculate RMSE.
 
-Answer
+### Answer
 
-> RMSE=√{13.5}\approx3.6742
+> **RMSE=√{13.5}\approx3.6742**
 
-Practice 8: R²
+## Practice 8: R²
 
 Actual values:
 
@@ -2952,23 +2952,23 @@ Predicted values:
 
 Mean:
 
-> ȳ=25
+> **ȳ=25**
 
 SST:
 
-> SST=500
+> **SST=500**
 
 SSE:
 
-> SSE=7
+> **SSE=7**
 
 Calculate R².
 
-Answer
+### Answer
 
-> R²=1-(7 / 500)=0.986
+> **R²=1-(7 / 500)=0.986**
 
-Practice 9: Perfect R²
+## Practice 9: Perfect R²
 
 Actual:
 
@@ -2982,11 +2982,11 @@ Predicted:
 10, 20, 30, 40
 ```
 
-Answer
+### Answer
 
-> R²=1
+> **R²=1**
 
-Practice 10: Baseline R²
+## Practice 10: Baseline R²
 
 Actual:
 
@@ -3006,11 +3006,11 @@ Predicted:
 25, 25, 25, 25
 ```
 
-Answer
+### Answer
 
-> R²=0
+> **R²=0**
 
-Practice 11: Negative R²
+## Practice 11: Negative R²
 
 Actual:
 
@@ -3026,39 +3026,39 @@ Predicted:
 
 Given:
 
-> SSE=3000
+> **SSE=3000**
 
 and:
 
-> SST=500
+> **SST=500**
 
 Calculate R².
 
-Answer
+### Answer
 
-> R²=1-(3000 / 500)=-5
+> **R²=1-(3000 / 500)=-5**
 
-Practice 12: Adjusted R²
-
-Given:
-
-> R²=0.80,\quad n=10,\quad k=2
-
-Answer
-
-> R²_{\mathrm{adj}}\approx0.742857
-
-Practice 13: More Predictors
+## Practice 12: Adjusted R²
 
 Given:
 
-> R²=0.80,\quad n=10,\quad k=3
+> **R²=0.80,\quad n=10,\quad k=2**
 
-Answer
+### Answer
 
-> R²_{\mathrm{adj}}=0.70
+> **R²_{\mathrm{adj}}\approx0.742857**
 
-Practice 14: Identify n and k
+## Practice 13: More Predictors
+
+Given:
+
+> **R²=0.80,\quad n=10,\quad k=3**
+
+### Answer
+
+> **R²_{\mathrm{adj}}=0.70**
+
+## Practice 14: Identify n and k
 
 Dataset:
 
@@ -3067,18 +3067,18 @@ Dataset:
 CGPA + Age -> Package
 ```
 
-Answer
+### Answer
 
-> n=5,\quad k=2
+> **n=5,\quad k=2**
 
 ---
 
-53. Six-Month Revision Checklist
+# 53. Six-Month Revision Checklist
 
 When revisiting this topic after six months, you should be able to answer these without
 external help.
 
-Data
+## Data
 
 - [ ] What is a DataFrame?
 - [ ] What is a Series?
@@ -3088,7 +3088,7 @@ Data
 - [ ] What does `df.describe()` tell us?
 - [ ] What does `.iloc` mean?
 
-Linear Regression
+## Linear Regression
 
 - [ ] What is supervised learning?
 - [ ] What is Linear Regression?
@@ -3101,7 +3101,7 @@ Linear Regression
 - [ ] What happens during `fit()`?
 - [ ] What happens during `predict()`?
 
-Train and Test
+## Train and Test
 
 - [ ] Why do we split data?
 - [ ] What is training data?
@@ -3113,7 +3113,7 @@ Train and Test
 - [ ] What is `y_pred`?
 - [ ] Why should test data remain unseen during training?
 
-Metrics
+## Metrics
 
 - [ ] MAE formula
 - [ ] MSE formula
@@ -3124,7 +3124,7 @@ Metrics
 - [ ] Which metric is more sensitive to large errors?
 - [ ] What units does each metric use?
 
-R²
+## R²
 
 - [ ] What is the mean baseline?
 - [ ] What is SST?
@@ -3136,7 +3136,7 @@ R²
 - [ ] Why is R² not ordinary accuracy?
 - [ ] What does R² = 0.773 mean?
 
-Adjusted R²
+## Adjusted R²
 
 - [ ] What is Adjusted R²?
 - [ ] What is the formula?
@@ -3147,7 +3147,7 @@ Adjusted R²
 - [ ] When can Adjusted R² increase?
 - [ ] When is it useful to compare Adjusted R²?
 
-Practical workflow
+## Practical workflow
 
 - [ ] Can I load a CSV?
 - [ ] Can I inspect a DataFrame?
@@ -3162,7 +3162,7 @@ Practical workflow
 
 ---
 
-54. Learning Results
+# 54. Learning Results
 
 The learning block completed the following workflow:
 
@@ -3232,7 +3232,7 @@ the real world.
 
 ---
 
-55. Next Step
+# 55. Next Step
 
 The CGPA to Package example was intentionally simple.
 
@@ -3307,7 +3307,7 @@ regression or Machine Learning.
 
 ---
 
-56. Final Mental Model
+# 56. Final Mental Model
 
 If you remember one flow, remember this:
 
@@ -3360,7 +3360,7 @@ If you remember one flow, remember this:
                     Interpretation
 ```
 
-The most important distinctions
+## The most important distinctions
 
 ```text
 Notebook
@@ -3387,7 +3387,7 @@ The project demonstrates the ability to apply that understanding to a new proble
 
 ---
 
-Scope
+## Scope
 
 This README covers the Simple Linear Regression learning block:
 
