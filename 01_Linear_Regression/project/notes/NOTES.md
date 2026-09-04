@@ -430,6 +430,12 @@ df_final.shape
 
 Placed back in Stage 2, next to the `age`/`year` redundancy fix, following the same discovered-in-Stage-3-fixed-in-Stage-2 rule used throughout this project.
 
+### A wrinkle in the discover-in-Stage-3-fix-in-Stage-2 rule
+
+Running the notebook top to bottom after this change surfaced a real bug: `KeyError: 'name'` on a cell further down that still referenced `df_final['name']`. The reason: for mileage, engine, and fuelType, the Stage 2 fix only changes rows or values, the column itself still exists afterward, so Stage 3 cells that reference it keep working fine. Dropping a column entirely is different, once `name` is dropped in Stage 2, nothing after that point in the notebook can reference it anymore, including the very cells that originally discovered the problem (the `.nunique()`, `.head()`, and reconstruction-check cells).
+
+Fix: those discovery cells (`name.nunique()`, `name.head(10)`, the `reconstructed` comparison, and the mismatches inspection) were moved out of Stage 3 entirely and placed in Stage 2, directly before the drop, so the notebook tells the full story, evidence then decision, in one place, and nothing downstream references a column that no longer exists. Stage 3 keeps only the short wrap-up markdown pointing back to Stage 2. Lesson for next time: a column-drop fix needs its supporting evidence moved with it, not just the drop line itself.
+
 ---
 
 (Next: Stage 4, Feature Engineering, decide the actual top-N-plus-Other cutoffs for `manufacturer` and `variant`, then Multivariate analysis if there is time before moving to preprocessing.)
