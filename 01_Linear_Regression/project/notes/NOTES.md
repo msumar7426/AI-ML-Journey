@@ -180,5 +180,46 @@ From here on, `df_final` is the dataframe Stage 3 (EDA) and everything after it 
 
 ---
 
-(Next: Stage 3, EDA. Univariate first: look at each column on its own, starting with `listingPrice`'s distribution, before comparing columns against each other.)
+## Part 6: Stage 3 EDA, Univariate: listingPrice, mileage, and a second cleaning pass
+
+Univariate means looking at one column completely on its own, no comparisons to anything else yet, not even the target. The goal is to understand shape, spread, and outliers before asking how columns relate to each other.
+
+### listingPrice
+
+Plotted with `df_final['listingPrice'].hist(bins=50)`. The prediction going in, based on Stage 1's mean (5.27M) being well above the median (3.2M), was a big cluster of ordinary-priced cars on the left with a long, thin tail of expensive ones stretching right. That is exactly what the histogram showed: a tall bar of roughly 5,600 cars priced under about 3 million PKR, then a rapid drop-off, with the handful of cars priced 20 million and up flattening out almost invisibly at this scale. This is why the mean sits so far above the median: the median only cares how many values are on each side, the mean is pulled upward by the size of the extreme few, even though there are barely any of them.
+
+### mileage
+
+Plotted the same way. This one did not match a simple single-peak shape. There are two humps: a bar near 0 km, then a dip around 20,000 to 40,000 km, then an even bigger peak around 80,000 to 100,000 km, before a long tail out toward very high mileage. Working theory for the dip: cars get listed either very early (someone decides quickly the car is not right for them, or upgrades soon after buying) or after a typical few years of ownership once mileage has built up to a "normal used car" level, but relatively few people list a car in between, once someone has driven a car for a year or two without issue, there is less reason to sell it yet. This cannot be proven without ownership-duration data, which this dataset does not have, so it is recorded here as a plausible explanation, not a confirmed one.
+
+### A placeholder problem found while looking at mileage's outliers
+
+Sorting `df_final` by mileage descending (`.sort_values(by='mileage', ascending=False).head(30)`) surfaced two distinct problems in the tail:
+
+A tight cluster of suspiciously identical or near-identical values sitting right at a ceiling: 13 rows at exactly `1000000`, plus 4 at `999999`, and one each at `999998`, `999990`, and `999000`. These appear on completely unrelated cars, a 1989 Suzuki Mehran, a 1980 Mazda Titan, a 2005 Honda Civic, different ages, brands, and prices, all sharing almost the same "mileage." Real odometer readings do not coincidentally cluster at a round number like that across unrelated cars. This is a placeholder, the same shape of problem as the electric cars' bare `'cc'` engine value from Part 4, something standing in for "unknown" rather than a real reading, most likely something the scraped site defaults to when the real mileage was missing or unreadable.
+
+Beyond that cluster, some remaining high values were still implausible once checked against the car's age. A 2018 Suzuki Swift listed at 980,000 km implies roughly 140,000 km driven per year, which is not realistic for a personal car. Meanwhile a 1984 Daihatsu Charade at 991,555 km (roughly 24,000 km per year over 41 years) and a 1988 Honda Accord at 987,546 km looked like genuine, if high, real-world values, non-round numbers attached to decades-old cars. The distinguishing signal was not the size of the number by itself, it was whether the number was suspiciously round and whether it made sense given the car's age.
+
+The fix, applied back in Stage 2 since it changes `df_final` (per the workflow template's own rule: EDA understands, cleaning changes):
+
+```python
+# Remove the placeholder cluster sitting right at the ceiling (1,000,000 and near-identical values)
+df_final = df_final[df_final['mileage'] < 999000]
+
+# Remove remaining rows where mileage is implausible for the car's age
+reference_year = 2025
+age_years = (reference_year - df_final['year']).clip(lower=1)
+implied_km_per_year = df_final['mileage'] / age_years
+
+df_final = df_final[implied_km_per_year <= 50000]
+df_final.shape
+```
+
+`age_years` is how old the car is (current year minus model year), `.clip(lower=1)` avoids dividing by zero for a brand new car. `implied_km_per_year` spreads the mileage evenly across those years, a rough estimate of how much the car was driven annually. 50,000 km/year is a generous ceiling, well above normal personal use, but low enough to catch something like the Swift's implied 140,000 km/year.
+
+Documented limitation: this is a heuristic, not a certainty. A 1980 Toyota Corolla at exactly 990,000 km passes the rate check (about 22,000 km/year over 45 years) even though the round number is still a little suspicious, we cannot fully resolve every ambiguous case, and 50,000 km/year as a cutoff is a judgment call rather than an exact law. Same philosophy as the near-duplicate rule in Part 3: a reasonable, stated simplification beats chasing certainty the data cannot provide.
+
+---
+
+(Next: keep going through Stage 3 univariate on `year` and `engine`, then Bivariate, comparing each feature against `listingPrice`.)
 
