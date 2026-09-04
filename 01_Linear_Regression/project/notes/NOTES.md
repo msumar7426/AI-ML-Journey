@@ -254,5 +254,36 @@ Documented limitation: the Isuzu NKR at 6650cc is dropped along with the confirm
 
 ---
 
-(Next: Stage 3 univariate on `year`, then Bivariate, comparing each feature against `listingPrice`.)
+## Part 8: Stage 3 EDA, Univariate: year (and closing out Univariate)
+
+Fixed a copy-paste bug first: the year histogram's title still said "Distribution of Engine Size" from the previous cell. Renamed it to "Distribution of Manufacturing Year".
+
+Plotted with `bins=200` for a finer view of the shape. The bars climb steadily from the 1950s and spike hard around 2020-2023. This makes sense: newer cars are more likely to still be on the road and worth listing for resale, while older cars have mostly already been sold, scrapped, or worn out with age. Depreciation adds to this too, since newer cars hold more resale value, sellers are more motivated to list them.
+
+### Checking the edges instead of trusting the shape
+
+Both mileage and engine looked fine at a glance in their histograms and still turned out to hide real placeholder problems, so rather than eyeballing the year histogram's edges and calling it clean, the edges were checked directly:
+
+```python
+df_final['year'].min()   # 1951
+df_final['year'].max()   # 2025
+```
+
+Neither is a placeholder. `2025` lines up exactly with when this dataset was scraped (December 2025), a listing for a current-year model is completely normal. `1951` is old but not physically impossible the way engine's 6600cc kei car was, someone can genuinely be selling a decades-old vintage car.
+
+The key difference from the mileage and engine problems: those were flagged because the *same* impossible value kept repeating across unrelated cars, that repetition is the actual fingerprint of a placeholder. A single old year doesn't have that fingerprint. Confirmed with a count:
+
+```python
+(df_final['year'] == 1951).sum()   # 1
+```
+
+Just one row. A genuine rare vintage listing, not a data-entry artifact. No fix needed for `year`.
+
+### Univariate, wrapped up
+
+Every column now has a defensible, documented reason for its distribution shape and its edges: `listingPrice` (right-skewed, expected for prices), `mileage` (bimodal, cleaned of two placeholder/implausibility issues), `engine` (two-peak, cleaned of a placeholder cluster and individual errors while keeping a genuine Mercedes AMG cluster), and `year` (climbing toward recent years, both edges verified genuine).
+
+---
+
+(Next: Bivariate, comparing each feature against `listingPrice` to see what actually predicts price.)
 
