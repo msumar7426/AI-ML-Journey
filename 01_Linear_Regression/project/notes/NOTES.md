@@ -285,5 +285,66 @@ Every column now has a defensible, documented reason for its distribution shape 
 
 ---
 
-(Next: Bivariate, comparing each feature against `listingPrice` to see what actually predicts price.)
+## Part 9: Stage 3 EDA, Bivariate: mileage, engine, year vs listingPrice, and a boxplot detour into fuelType
+
+### Numeric features vs price: scatter plots
+
+Bivariate means looking at two variables together instead of one, specifically here, each feature against `listingPrice`, since price is what we are ultimately trying to predict.
+
+For two numeric columns, the tool is a scatter plot: one dot per row, x-position from the feature, y-position from price.
+
+```python
+plt.scatter(df_final['mileage'], df_final['listingPrice'])
+plt.xlabel('Mileage (km)')
+plt.ylabel('Listing Price (PKR)')
+plt.title('Mileage vs Listing Price')
+plt.show()
+```
+
+Same pattern repeated for `engine` and `year`.
+
+What this showed: `mileage` vs price is a steep decay curve, price drops fast at low mileage and flattens out at high mileage, not a straight line. `engine` vs price is noisy and scattered, no clean trend, expensive cars show up across many different engine sizes. `year` vs price is the clearest of the three, flat and low for decades, then curving sharply upward for recent years, the mirror image of the mileage curve, which makes sense since mileage and year are related.
+
+### Why a curved relationship does not rule out linear regression
+
+Seeing a curve instead of a straight line here is not a dead end. It is expected. Real-world price-vs-usage relationships (car price vs mileage, house price vs age, phone resale value vs months used) are almost always exponential-decay shaped, not linear, and this connects directly back to the Stage 1 finding that `listingPrice` itself is right-skewed. Log-transforming price (planned for Stage 4/5, Feature Engineering/Preprocessing) is the standard fix for exactly this kind of curve, and it is already on the roadmap. Linear regression does not require every raw feature to already look linear against price, it requires the relationship to become roughly linear after the right transformation.
+
+### Categorical features vs price: boxplots
+
+A scatter plot needs two numeric axes, so it does not work for a categorical column like `fuelType` (you cannot plot "Petrol" on a number line). The tool for categorical-vs-numeric is a boxplot instead: one box per category, showing the spread of prices within that group.
+
+```python
+df_final.boxplot(column='listingPrice', by='fuelType')
+plt.xlabel('Fuel Type')
+plt.ylabel('Listing Price (PKR)')
+plt.title('Listing Price by Fuel Type')
+plt.suptitle('')
+plt.show()
+```
+
+Minor gotcha worth remembering: pandas' `.boxplot()` automatically adds its own title above the plot (something like "Boxplot grouped by fuelType"), separate from `plt.title()`. Without `plt.suptitle('')` to clear it, two titles stack on top of each other.
+
+### Reading a boxplot
+
+The box spans from Q1 (25th percentile) to Q3 (75th percentile), the middle 50% of prices in that group. The line inside the box is the median. The whiskers extend to the most extreme value that is still within 1.5x the box height (the IQR) from the box. Anything further out than that is drawn as an individual dot, an outlier, a car priced unusually high or low for its group.
+
+Worked through a tiny made-up example (11 prices: 10, 12, 13, 14, 15, 15, 16, 17, 18, 20, 45) to see the mechanics: median 15, Q1 13.5, Q3 17.5, IQR 4, so the "normal" range extends to roughly 1.5x4=6 beyond the box (7.5 to 23.5). The value 45 falls far outside that range, so it gets drawn as an outlier dot rather than stretching the whisker up to it.
+
+Reading the actual `fuelType` plot: Petrol has a huge column of outlier dots since it is by far the most common fuel type, spanning everything from cheap economy cars to expensive luxury ones. Electric has a noticeably higher median and wider box than Petrol, Diesel, or Hybrid. CNG, LPG, and PHEV are compressed near the bottom, either tightly clustered prices or few rows in that category.
+
+### A second, smaller placeholder-style problem: fuelType casing
+
+`df_final['fuelType'].unique()` returned 8 categories instead of the expected 7: `LPG` and `Lpg` are the same real fuel type, split into two by inconsistent capitalization. Every other value (`CNG`, `PHEV`, `Petrol`, `Diesel`, `Hybrid`, `Electric`) was already consistently formatted.
+
+Considered blanket-uppercasing the whole column with `.str.upper()`, this would technically merge `LPG`/`Lpg` fine (pandas treats identical strings as the same category), but it would also turn the already-correct word-case values into shouting case (`Petrol` to `PETROL`, and so on). Since only one value was actually broken, fixed it directly instead:
+
+```python
+df_final['fuelType'] = df_final['fuelType'].replace('Lpg', 'LPG')
+```
+
+Same stage-boundary rule as always applied here: this was discovered while doing Bivariate EDA (Stage 3), but since it changes `df_final`, the fix itself lives back in Stage 2, not in the EDA cell that found it.
+
+---
+
+(Next: continue Bivariate with `transmission`, then the higher-cardinality categorical columns, `manufacturer` and `variant`, which will need a different approach since a boxplot with dozens or hundreds of categories would be unreadable.)
 
