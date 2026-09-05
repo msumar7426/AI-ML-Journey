@@ -479,3 +479,27 @@ df_final['variant_grouped'] = df_final['variant'].where(
 
 (Next: Stage 5, Preprocessing, encode the categorical columns, decide the final feature set, and do the train/test split.)
 
+
+## Quick Reference: Things I Kept Confusing
+
+A running log of specific questions and confusions from this project, added to every time something trips me up, so I can search this instead of re-asking or re-deriving it from scratch.
+
+**Jupyter only auto-displays the LAST line of a cell.** Put three expressions in one cell and only the last one's result shows up, the first two still ran, their output was just never printed. Fix: `print()` each one, or split into separate cells.
+
+**Mean > median means right-skewed.** A big mountain of common values on the left, a long thin tail of rare extreme values stretching right.
+
+**Histogram bins are equal-width value ranges, not categories.** The x-axis is the value being sliced into ranges, the y-axis is how many rows fall in each range.
+
+**Boxplot anatomy: box = middle 50% (Q1 to Q3), line inside = median, whiskers = normal range (1.5x the box height beyond the box), dots beyond whiskers = outliers.** An outlier is just "statistically unusual within its group," not automatically an error, a car priced far above its group's typical range can be a genuine luxury vehicle, not a data problem. Whether it's an error or genuine depends on context, not the label.
+
+**pandas' `.boxplot()` auto-adds its own title, separate from `plt.title()`.** Without `plt.suptitle('')` to clear it, two titles stack on top of each other.
+
+**`.groupby(col)[other_col].median()` splits rows into buckets by `col`'s values, then computes a stat on `other_col` separately within each bucket.** Nothing calculated until the stat function is called at the end.
+
+**`.where(condition, fallback)` keeps the original value where condition is True, replaces it with fallback where False.** Reads backwards from a normal if-statement's instinct ("do X if true"), it's closer to "protect if true, overwrite if false."
+
+**`pd.get_dummies(..., drop_first=True)` drops one category per column on purpose.** Keeping every category creates a redundant column that's 100% predictable from the others (if a row is 0 in every other category, it must be the missing one), which confuses linear regression's math. The dropped category becomes the implicit baseline, no information is lost.
+
+**Train/test split has to happen before scaling, not after.** Scaling using statistics from the whole dataset lets test-set information leak into how training data gets prepared, giving a dishonestly optimistic sense of how well the model generalizes. Fit the scaler only on training data, apply (never re-fit) to test data.
+
+**Log transform treats equal ratios as equal distances, not equal raw differences.** That's why it compresses large values (like expensive cars) far more than small ones, fixing right-skew, while just dividing by a constant only rescales everything proportionally and keeps the exact same skewed shape.
