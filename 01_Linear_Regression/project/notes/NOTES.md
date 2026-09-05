@@ -695,6 +695,21 @@ Stage 0 named RMSE in PKR as the metric to report, since a rupee amount is direc
 
 ---
 
+### Try it yourself: an inference cell at the end
+
+Asked what real ML developers do beyond just proving the model works on the test set, do they let you type in a car and get a price back. Yes, this is common, it's usually called an inference cell or a "try it yourself" cell, a lighter, notebook-only version of what deployment does with a web form.
+
+Wrote `predict_car_price(year, mileage, engine, fuelType, transmission, manufacturer, variant)`, which repeats Stage 4 and Stage 5's steps for a single new row instead of the whole dataset:
+
+1. Convert `manufacturer`/`variant` to "Other" if they weren't common enough to keep their own category during Stage 4 (reusing `keep_manufacturers`/`keep_variants` computed back then).
+2. `pd.get_dummies` on a single row only creates columns for whatever category that one row actually has, so `reindex(columns=X.columns, fill_value=0)` forces it to line up with every column the model actually learned, filling in 0 for everything else, matching `X_train`'s exact shape.
+3. Scale the numeric columns using the already-fit `scaler` (transform only, same leakage rule as before, never re-fit on new data).
+4. Predict with the trained `sklearn_model`, then `np.exp()` to undo the log transform and get a real rupee number back.
+
+Tested with a 2019 Honda Civic, 40,000 km, 1800cc, Petrol, Automatic, as a sanity check that the function runs end to end and returns a plausible number.
+
+---
+
 ### Multivariate EDA: removed instead of left as a placeholder
 
 The Multivariate section header originally had an empty placeholder cell after it, which read as unfinished work rather than a deliberate choice. Since this project only uses plain multiple linear regression with no interaction terms, a multivariate pass (for example, price vs mileage broken down by fuel type) would not have changed any modeling decision, it would only have been analysis for its own sake. Rather than pad the notebook with a check that would not be acted on, the section was removed entirely. Univariate and Bivariate already surfaced everything Stage 4 and Stage 5 needed. If interaction terms or a more complex model are explored later, this would be the natural place to reintroduce multivariate analysis.

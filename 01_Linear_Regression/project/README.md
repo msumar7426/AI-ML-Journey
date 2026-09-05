@@ -27,6 +27,8 @@ The project follows an 8 stage workflow (see `templates/` at the repository root
 7. **Modeling.** Three models trained and compared: a baseline that always predicts the mean, scikit-learn's `LinearRegression`, and a from scratch implementation of multiple linear regression solved directly with the Normal Equation.
 8. **Evaluation.** MAE, MSE, RMSE, R2, and Adjusted R2 on a held out test set, plus a residual plot and a rupee denominated error check.
 
+The notebook also ends with a `predict_car_price(...)` function: type in a car's specs (year, mileage, engine, fuel type, transmission, manufacturer, variant) and get a predicted price back, without re-running any preprocessing by hand.
+
 The full reasoning behind every decision, written for a beginner audience with worked examples, lives in `notes/NOTES.md`.
 
 ## Results
