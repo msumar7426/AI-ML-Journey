@@ -40,7 +40,7 @@ Every code folder keeps a `notes/` subfolder alongside it. That is where the con
 
 | Project | Status | Description |
 |---|---|---|
-| Used Car Price Prediction | In progress (Stage 2 of 8 complete) | Multiple linear regression on 15,171 real used car listings scraped from a Karachi marketplace. See `01_Linear_Regression/project/`, and `01_Linear_Regression/project/notes/` for the full reasoning behind every cleaning decision. |
+| Used Car Price Prediction | Complete (8 of 8 stages) | Multiple linear regression on 15,171 real used car listings scraped from a Karachi marketplace. R2 of 0.92 on held out test data. See `01_Linear_Regression/project/README.md` for the full writeup, and `01_Linear_Regression/project/notes/` for the reasoning behind every decision. |
 
 ## Progress Tracker
 
@@ -50,7 +50,7 @@ Every code folder keeps a `notes/` subfolder alongside it. That is where the con
 | Git and GitHub | Done |
 | Simple and Multiple Linear Regression (theory and from scratch code) | Done |
 | Gradient Descent | Blocked (source notebook is empty, needs to be redone) |
-| Used Car Price Prediction project | In progress |
+| Used Car Price Prediction project | Done |
 | Univariate and Multivariate Analysis | In progress |
 
 ## Learning Approach

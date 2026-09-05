@@ -667,6 +667,28 @@ A residual is just the leftover error for one row, actual minus predicted. Plott
 
 (Results and interpretation to be filled in after Restart & Run All, once the actual metric numbers are known.)
 
+### Sample predictions, 30 real cars side by side
+
+Added a comparison table (`Actual Price`, `Predicted Price (sklearn)`, `Predicted Price (our class)`, `Error (sklearn)`) for 30 test-set cars, same idea as `learningSimpleLinearRegression.ipynb`'s comparison dataframe, but with `np.exp()` applied to undo the log transform first, so the table reads in real rupees instead of log units.
+
+### Actual results (Restart & Run All)
+
+```
+Baseline (predict the mean): MAE=0.7561  MSE=0.9496  RMSE=0.9745  R2=-0.0001
+scikit-learn:                 MAE=0.1742  MSE=0.0735  RMSE=0.2711  R2=0.9226  Adjusted R2=0.9190
+Our own class:                MAE=0.1742  MSE=0.0735  RMSE=0.2711  R2=0.9226  Adjusted R2=0.9190
+```
+
+R2 of 0.9226 means the model explains about 92% of the variance in log(listingPrice), far above the baseline's -0.0001 (a negative/near-zero R2 confirms the baseline model adds no predictive value, exactly as expected for "always guess the average"). scikit-learn and the custom Normal Equation class produce identical metrics to 4 decimal places, the strongest possible confirmation that the from scratch implementation is correct.
+
+### Closing the loop with Stage 0: RMSE in real rupees
+
+Stage 0 named RMSE in PKR as the metric to report, since a rupee amount is directly interpretable, but every metric above was computed on `log_listingPrice`, the actual training target, so those numbers are in log units. Added a final cell that applies `np.exp()` to the sklearn model's predictions and the true test values, then recomputes MAE and RMSE on the real price scale, directly answering Stage 0's original question ("how many rupees off is this model, typically").
+
+### Multivariate EDA: the skip, made explicit in the notebook itself
+
+Earlier, the Multivariate section header was left with an empty placeholder cell and no explanation, readable in the notebook as unfinished rather than a deliberate choice. Added a markdown cell there explaining the decision (Univariate and Bivariate already surfaced everything Stage 4 and Stage 5 needed, the one-day deadline meant Multivariate combinations were scoped out rather than blocking progress) so anyone reading the notebook standalone, without this NOTES.md file open, understands it was a decision, not a gap.
+
 
 
 ## Quick Reference: Things I Kept Confusing
