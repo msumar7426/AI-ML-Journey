@@ -685,6 +685,18 @@ R2 of 0.9226 means the model explains about 92% of the variance in log(listingPr
 
 Stage 0 named RMSE in PKR as the metric to report, since a rupee amount is directly interpretable, but every metric above was computed on `log_listingPrice`, the actual training target, so those numbers are in log units. Added a final cell that applies `np.exp()` to the sklearn model's predictions and the true test values, then recomputes MAE and RMSE on the real price scale, directly answering Stage 0's original question ("how many rupees off is this model, typically").
 
+### Actual vs Predicted plot, added to answer "where's the linear line"
+
+Got confused looking at the residual plot expecting to see the classic diagonal best fit line from tutorials (like CGPA vs Package), and instead saw a flat horizontal cloud. Those are two different plots asking two different questions:
+
+Feature vs Price (Bivariate EDA, back in Stage 3) asks "does price go up as this one raw feature goes up." A single feature's scatter can look like a fuzzy cloud even when the full multi feature model works well, because price depends on many features at once, not just the one being plotted.
+
+Residual plot (Actual minus Predicted, vs Predicted) asks "after the model guessed, were its mistakes random noise or a systematic pattern." A flat horizontal cloud centered on zero is the GOOD outcome here, it means the leftover error doesn't depend on how big the prediction was. A diagonal or curved pattern in a residual plot would be the bad sign, not the good one.
+
+Added a third plot to give the visual reassurance that was actually missing: Actual Price (x-axis) vs Predicted Price (y-axis), both converted back from log scale with np.exp(), with a dashed y=x reference line (not a fitted line, just "where a perfect prediction would land"). This is the plot that should show dots hugging a diagonal, the closest equivalent in a multi feature model to the single line tutorials show for one feature. Placed right before the residual plot, since it answers "is this working at all" before the residual plot asks the deeper "is it working correctly."
+
+---
+
 ### Multivariate EDA: removed instead of left as a placeholder
 
 The Multivariate section header originally had an empty placeholder cell after it, which read as unfinished work rather than a deliberate choice. Since this project only uses plain multiple linear regression with no interaction terms, a multivariate pass (for example, price vs mileage broken down by fuel type) would not have changed any modeling decision, it would only have been analysis for its own sake. Rather than pad the notebook with a check that would not be acted on, the section was removed entirely. Univariate and Bivariate already surfaced everything Stage 4 and Stage 5 needed. If interaction terms or a more complex model are explored later, this would be the natural place to reintroduce multivariate analysis.
