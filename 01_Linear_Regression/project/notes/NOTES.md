@@ -438,5 +438,44 @@ Fix: those discovery cells (`name.nunique()`, `name.head(10)`, the `reconstructe
 
 ---
 
-(Next: Stage 4, Feature Engineering, decide the actual top-N-plus-Other cutoffs for `manufacturer` and `variant`, then Multivariate analysis if there is time before moving to preprocessing.)
+## Part 12: Stage 4, Feature Engineering
+
+Multivariate analysis was consciously skipped to keep the project on schedule. The key relationships were already understood from Bivariate; a correlation heatmap would have been nice-to-have, not essential to a first working model.
+
+### Log-transforming listingPrice
+
+Traces back to Stage 1 (right-skew, mean well above median) and Stage 3 Bivariate (every scatter plot against price came out curved rather than straight). A log transform compresses large values more aggressively than small ones, treating equal ratios as equal distances, which pulls in the long right tail and should straighten those curved relationships.
+
+```python
+import numpy as np
+df_final['log_listingPrice'] = np.log(df_final['listingPrice'])
+```
+
+Kept as a new column rather than overwriting `listingPrice`, so real currency values stay available for interpreting results later. The resulting histogram came out close to a symmetric bell shape, confirming the fix worked.
+
+### Grouping manufacturer and variant into top-N-plus-Other
+
+Traces back to Stage 3 Bivariate, where `manufacturer` (58 categories) and `variant` (349 categories) were both heavily skewed toward a handful of common values with a long tail of rare, single-listing ones. One-hot encoding either column as-is would create dozens or hundreds of columns the model could never generalize from.
+
+```python
+manufacturer_counts = df_final['manufacturer'].value_counts()
+keep_manufacturers = manufacturer_counts[manufacturer_counts >= 100].index
+df_final['manufacturer_grouped'] = df_final['manufacturer'].where(
+    df_final['manufacturer'].isin(keep_manufacturers), 'Other'
+)
+
+variant_counts = df_final['variant'].value_counts()
+keep_variants = variant_counts[variant_counts >= 20].index
+df_final['variant_grouped'] = df_final['variant'].where(
+    df_final['variant'].isin(keep_variants), 'Other'
+)
+```
+
+`.where(condition, fallback)` keeps the original value wherever the condition is True and replaces it with the fallback wherever it's False, the opposite instinct of a normal if-statement, worth remembering since it reads backwards at first.
+
+`manufacturer_grouped` came out to 11 categories total (down from 58): Toyota, Suzuki, Honda, Daihatsu, Nissan, KIA, Hyundai, Mitsubishi, Changan, Mercedes Benz, each kept for having 100+ listings, and `Other` holding the remaining 631 rows. `variant_grouped` used a lower threshold (20+ listings) since variants are more fragmented to begin with. Both original columns were kept alongside the grouped ones for reference.
+
+---
+
+(Next: Stage 5, Preprocessing, encode the categorical columns, decide the final feature set, and do the train/test split.)
 
