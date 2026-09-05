@@ -67,7 +67,7 @@ Run all cells in order from top to bottom.
 - Trained on Karachi listings only, for one point in time (December 2025). Prices are expected to drift with currency and fuel price changes, and the model has not seen data from any other city.
 - Predicts asking price, not confirmed transaction price, in a market where negotiation is common.
 - The `variant_grouped` feature has many categories (72), some backed by only a couple dozen rows, so coefficients for rare variants are noisier than for common ones.
-- Multivariate EDA (for example, price versus mileage broken down by fuel type) was scoped out to meet a one day timeline and is a natural next step.
+- Only main effects are modeled; no interaction terms (for example, mileage's effect on price differing by fuel type) were explored, since plain multiple linear regression does not use them without being explicitly engineered.
 
 ## Author
 

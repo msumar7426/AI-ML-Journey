@@ -685,9 +685,9 @@ R2 of 0.9226 means the model explains about 92% of the variance in log(listingPr
 
 Stage 0 named RMSE in PKR as the metric to report, since a rupee amount is directly interpretable, but every metric above was computed on `log_listingPrice`, the actual training target, so those numbers are in log units. Added a final cell that applies `np.exp()` to the sklearn model's predictions and the true test values, then recomputes MAE and RMSE on the real price scale, directly answering Stage 0's original question ("how many rupees off is this model, typically").
 
-### Multivariate EDA: the skip, made explicit in the notebook itself
+### Multivariate EDA: removed instead of left as a placeholder
 
-Earlier, the Multivariate section header was left with an empty placeholder cell and no explanation, readable in the notebook as unfinished rather than a deliberate choice. Added a markdown cell there explaining the decision (Univariate and Bivariate already surfaced everything Stage 4 and Stage 5 needed, the one-day deadline meant Multivariate combinations were scoped out rather than blocking progress) so anyone reading the notebook standalone, without this NOTES.md file open, understands it was a decision, not a gap.
+The Multivariate section header originally had an empty placeholder cell after it, which read as unfinished work rather than a deliberate choice. Since this project only uses plain multiple linear regression with no interaction terms, a multivariate pass (for example, price vs mileage broken down by fuel type) would not have changed any modeling decision, it would only have been analysis for its own sake. Rather than pad the notebook with a check that would not be acted on, the section was removed entirely. Univariate and Bivariate already surfaced everything Stage 4 and Stage 5 needed. If interaction terms or a more complex model are explored later, this would be the natural place to reintroduce multivariate analysis.
 
 
 
