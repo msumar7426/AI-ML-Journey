@@ -37,7 +37,7 @@ The full reasoning behind every decision, written for a beginner audience with w
 | scikit-learn LinearRegression | 0.1742 | 0.2711 | 0.9226 | 0.9190 |
 | Custom Normal Equation implementation | 0.1742 | 0.2711 | 0.9226 | 0.9190 |
 
-The model explains about 92 percent of the variance in log listing price on data it has never seen, a large improvement over the baseline. The custom from scratch implementation matches scikit-learn's results to four decimal places, confirming the Normal Equation was implemented correctly. See the notebook's final cells for the same error expressed directly in rupees, and for a residual plot checking for systematic bias.
+The model explains about 92 percent of the variance in log listing price on data it has never seen, a large improvement over the baseline. The custom from scratch implementation matches scikit-learn's results to four decimal places, confirming the Normal Equation was implemented correctly. The notebook's final cells also include a side by side sample of 30 individual predictions, an Actual vs Predicted scatter plot, a residual plot checking for systematic bias, and the same error expressed directly in rupees.
 
 ## Repository Structure
 

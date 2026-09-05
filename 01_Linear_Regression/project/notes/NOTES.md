@@ -602,6 +602,10 @@ Matching to about 7 decimal places is strong evidence the hand-written Normal Eq
 
 ## Part 15: Stage 7, Evaluation & Iteration
 
+### Sample predictions, 30 real cars side by side
+
+Added a comparison table (`Actual Price`, `Predicted Price (sklearn)`, `Predicted Price (our class)`, `Error (sklearn)`) for 30 test-set cars, same idea as `learningSimpleLinearRegression.ipynb`'s comparison dataframe, but with `np.exp()` applied to undo the log transform first, so the table reads in real rupees instead of log units.
+
 ### Manual metrics, same pattern as learningSimpleLinearRegression.ipynb
 
 ```python
@@ -651,6 +655,26 @@ R² answers "how much better is this than just guessing the average every time" 
 
 Adjusted R² exists because R² alone can look better just by adding more columns, even useless, noisy ones, it never goes down when a feature is added, even a garbage one. Adjusted R² applies a penalty based on how many features (`k`) were used relative to how many rows (`n`), which matters a lot here specifically because `X` has 91 columns, many of them from the `variant_grouped` one-hot columns where some categories only have a couple dozen rows behind them.
 
+### Actual results (Restart & Run All)
+
+```
+Baseline (predict the mean): MAE=0.7561  MSE=0.9496  RMSE=0.9745  R2=-0.0001
+scikit-learn:                 MAE=0.1742  MSE=0.0735  RMSE=0.2711  R2=0.9226  Adjusted R2=0.9190
+Our own class:                MAE=0.1742  MSE=0.0735  RMSE=0.2711  R2=0.9226  Adjusted R2=0.9190
+```
+
+R2 of 0.9226 means the model explains about 92% of the variance in log(listingPrice), far above the baseline's -0.0001 (a negative/near-zero R2 confirms the baseline model adds no predictive value, exactly as expected for "always guess the average"). scikit-learn and the custom Normal Equation class produce identical metrics to 4 decimal places, the strongest possible confirmation that the from scratch implementation is correct.
+
+### Actual vs Predicted plot, added to answer "where's the linear line"
+
+Got confused looking at the residual plot expecting to see the classic diagonal best fit line from tutorials (like CGPA vs Package), and instead saw a flat horizontal cloud. Those are two different plots asking two different questions:
+
+Feature vs Price (Bivariate EDA, back in Stage 3) asks "does price go up as this one raw feature goes up." A single feature's scatter can look like a fuzzy cloud even when the full multi feature model works well, because price depends on many features at once, not just the one being plotted.
+
+Residual plot (Actual minus Predicted, vs Predicted) asks "after the model guessed, were its mistakes random noise or a systematic pattern." A flat horizontal cloud centered on zero is the GOOD outcome here, it means the leftover error doesn't depend on how big the prediction was. A diagonal or curved pattern in a residual plot would be the bad sign, not the good one.
+
+Added a third plot to give the visual reassurance that was actually missing: Actual Price (x-axis) vs Predicted Price (y-axis), both converted back from log scale with np.exp(), with a dashed y=x reference line (not a fitted line, just "where a perfect prediction would land"). This is the plot that should show dots hugging a diagonal, the closest equivalent in a multi feature model to the single line tutorials show for one feature. Placed right before the residual plot, since it answers "is this working at all" before the residual plot asks the deeper "is it working correctly."
+
 ### Residual plot
 
 ```python
@@ -665,35 +689,9 @@ plt.show()
 
 A residual is just the leftover error for one row, actual minus predicted. Plotting every residual against its predicted value is a pattern check: a healthy model shows a random, formless cloud of dots scattered evenly around the zero line (the red dashed line). If instead there is a visible shape, a curve, a funnel that widens on one side, a slope, that is a sign the model is systematically wrong in some predictable way (for example, consistently underpricing expensive cars), something a single R² number would hide.
 
-(Results and interpretation to be filled in after Restart & Run All, once the actual metric numbers are known.)
-
-### Sample predictions, 30 real cars side by side
-
-Added a comparison table (`Actual Price`, `Predicted Price (sklearn)`, `Predicted Price (our class)`, `Error (sklearn)`) for 30 test-set cars, same idea as `learningSimpleLinearRegression.ipynb`'s comparison dataframe, but with `np.exp()` applied to undo the log transform first, so the table reads in real rupees instead of log units.
-
-### Actual results (Restart & Run All)
-
-```
-Baseline (predict the mean): MAE=0.7561  MSE=0.9496  RMSE=0.9745  R2=-0.0001
-scikit-learn:                 MAE=0.1742  MSE=0.0735  RMSE=0.2711  R2=0.9226  Adjusted R2=0.9190
-Our own class:                MAE=0.1742  MSE=0.0735  RMSE=0.2711  R2=0.9226  Adjusted R2=0.9190
-```
-
-R2 of 0.9226 means the model explains about 92% of the variance in log(listingPrice), far above the baseline's -0.0001 (a negative/near-zero R2 confirms the baseline model adds no predictive value, exactly as expected for "always guess the average"). scikit-learn and the custom Normal Equation class produce identical metrics to 4 decimal places, the strongest possible confirmation that the from scratch implementation is correct.
-
 ### Closing the loop with Stage 0: RMSE in real rupees
 
 Stage 0 named RMSE in PKR as the metric to report, since a rupee amount is directly interpretable, but every metric above was computed on `log_listingPrice`, the actual training target, so those numbers are in log units. Added a final cell that applies `np.exp()` to the sklearn model's predictions and the true test values, then recomputes MAE and RMSE on the real price scale, directly answering Stage 0's original question ("how many rupees off is this model, typically").
-
-### Actual vs Predicted plot, added to answer "where's the linear line"
-
-Got confused looking at the residual plot expecting to see the classic diagonal best fit line from tutorials (like CGPA vs Package), and instead saw a flat horizontal cloud. Those are two different plots asking two different questions:
-
-Feature vs Price (Bivariate EDA, back in Stage 3) asks "does price go up as this one raw feature goes up." A single feature's scatter can look like a fuzzy cloud even when the full multi feature model works well, because price depends on many features at once, not just the one being plotted.
-
-Residual plot (Actual minus Predicted, vs Predicted) asks "after the model guessed, were its mistakes random noise or a systematic pattern." A flat horizontal cloud centered on zero is the GOOD outcome here, it means the leftover error doesn't depend on how big the prediction was. A diagonal or curved pattern in a residual plot would be the bad sign, not the good one.
-
-Added a third plot to give the visual reassurance that was actually missing: Actual Price (x-axis) vs Predicted Price (y-axis), both converted back from log scale with np.exp(), with a dashed y=x reference line (not a fitted line, just "where a perfect prediction would land"). This is the plot that should show dots hugging a diagonal, the closest equivalent in a multi feature model to the single line tutorials show for one feature. Placed right before the residual plot, since it answers "is this working at all" before the residual plot asks the deeper "is it working correctly."
 
 ---
 
