@@ -533,6 +533,141 @@ Known result to keep in mind: `variant_grouped` alone came out to 72 categories 
 
 (Next: Stage 6, Modeling. Baseline first (predict the mean, so there is something concrete to beat), then two versions of multiple linear regression side by side, scikit-learn's `LinearRegression`, and the custom `MultipleLinearRegression` class from `learningMultipleLinearRegression.ipynb`, which solves the same problem by hand with the Normal Equation.)
 
+---
+
+## Part 14: Stage 6, Modeling (baseline, scikit-learn, and our own class)
+
+### Baseline model: predicting the mean for every row
+
+```python
+baseline_pred = np.full(shape=y_test.shape, fill_value=y_train.mean())
+```
+
+Before trusting any real model, first build the laziest possible one: guess the exact same number (the average log price from training) for every single car, no matter its year, mileage, or anything else. This is the bar any real model has to clear. If a fancy model can't beat "just guess the average," it isn't actually learning anything useful.
+
+### scikit-learn's LinearRegression
+
+```python
+from sklearn.linear_model import LinearRegression
+sklearn_model = LinearRegression()
+sklearn_model.fit(X_train, y_train)
+sklearn_pred = sklearn_model.predict(X_test)
+```
+
+The trusted, battle-tested library version. Fit on training data only, then used to predict on the test set it has never seen.
+
+### Our own MultipleLinearRegression class (the Normal Equation, by hand)
+
+```python
+class MultipleLinearRegression:
+    def __init__(self):
+        self.coef_ = None
+        self.intercept_ = None
+
+    def fit(self, X_train, y_train):
+        X_train = np.insert(X_train, 0, 1, axis=1)
+        betas = np.linalg.inv(X_train.T.dot(X_train)).dot(X_train.T).dot(y_train)
+        self.intercept_ = betas[0]
+        self.coef_ = betas[1:]
+
+    def predict(self, X_test):
+        y_pred = np.dot(X_test, self.coef_) + self.intercept_
+        return y_pred
+
+custom_model = MultipleLinearRegression()
+custom_model.fit(X_train.astype(float).values, y_train.astype(float).values)
+custom_pred = custom_model.predict(X_test.astype(float).values)
+```
+
+This does the exact same job as scikit-learn, but by solving the Normal Equation directly: `betas = (X^T X)^-1 X^T y`. In plain words, it inserts a column of 1s at the front (so the math can solve for the intercept alongside every feature's coefficient in one shot), then does matrix multiplication and inversion to solve for every beta (coefficient) at once.
+
+**The error we hit and fixed:** `UFuncTypeError: Cannot cast ufunc 'inv' input from dtype('O') to dtype('float64')`. `X_train` mixes scaled numeric columns (float64, from `year`/`mileage`/`engine`) with one-hot columns that are `True`/`False` booleans. Calling `.values` on a dataframe with mixed float and boolean columns can produce an "object" dtype array (pandas' fallback catch-all type) instead of a clean numeric one, and `np.linalg.inv` refuses to run matrix inversion on anything that isn't purely numeric. Fix: force everything to float first with `.astype(float)` before pulling out `.values`, on both the training call and the predict call.
+
+**Sanity check that confirmed the class works correctly:**
+
+```python
+print("sklearn intercept:", sklearn_model.intercept_)
+print("custom intercept:", custom_model.intercept_)
+# sklearn intercept: 13.988732107757304
+# custom intercept:  13.9887321078732
+```
+
+Matching to about 7 decimal places is strong evidence the hand-written Normal Equation implementation is mathematically correct, both are solving the exact same underlying optimization problem, just with different code paths (an iterative/optimized library routine vs. direct matrix inversion).
+
+**A red squiggly line that was not a real error:** VS Code's type checker (Pylance) underlined `np.dot(X_test, self.coef_)` in `predict()`, complaining "No overloads for 'dot' match the provided arguments." This is a false alarm, not a runtime bug. Pylance looks at `__init__` and sees `self.coef_ = None`, so it assumes `coef_` could still be `None` by the time `predict()` runs, and it can't prove otherwise just by reading the code. It has no way of knowing that `fit()` always runs first and always replaces `None` with real numbers. The cell actually ran successfully (green checkmark, correct matching intercepts above), so the real Python interpreter never had a problem, only the static analyzer's guess was overly cautious. Lesson: a squiggly underline in the editor is a prediction about what MIGHT go wrong, not proof that something DID go wrong, always check whether the cell actually executed and what it actually printed before assuming a real bug.
+
+(Next: Stage 7, Evaluation. Score baseline, scikit-learn, and our own class against the untouched test set using MAE, MSE, RMSE, R², and Adjusted R², then look at a residual plot to check for any systematic pattern in the errors.)
+
+---
+
+## Part 15: Stage 7, Evaluation & Iteration
+
+### Manual metrics, same pattern as learningSimpleLinearRegression.ipynb
+
+```python
+def manual_metrics(y_true, y_pred, name):
+    error = y_true - y_pred
+    mae = np.abs(error).mean()
+    mse = (error ** 2).mean()
+    rmse = mse ** 0.5
+    print(f"{name}: MAE={mae:.4f}  MSE={mse:.4f}  RMSE={rmse:.4f}")
+    return mae, mse, rmse
+
+manual_metrics(y_test, baseline_pred, "Baseline (predict the mean)")
+manual_metrics(y_test, sklearn_pred, "scikit-learn")
+manual_metrics(y_test, custom_pred, "Our own class")
+```
+
+Same three-step idea used back in the simple regression notebook: error is just actual minus predicted for every row, MAE is the average size of that error ignoring direction (absolute value), and RMSE squares each error first (which punishes big misses much more than small ones), averages, then square-roots back to the original units. Since `y` here is `log_listingPrice`, these numbers are in log units, not raw rupees, useful for comparing the three models against each other, but not something to read as "off by X rupees" directly.
+
+### Cross-checking with scikit-learn's own metric functions
+
+```python
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+for name, pred in [("Baseline", baseline_pred), ("scikit-learn", sklearn_pred), ("Our own class", custom_pred)]:
+    mae = mean_absolute_error(y_test, pred)
+    mse = mean_squared_error(y_test, pred)
+    rmse = mse ** 0.5
+    r2 = r2_score(y_test, pred)
+    print(f"{name}: MAE={mae:.4f}  MSE={mse:.4f}  RMSE={rmse:.4f}  R2={r2:.4f}")
+```
+
+If the manual numbers above and these library numbers don't match, that is the signal to go back and find a bug in the manual formula, not the other way around, scikit-learn's functions are the trusted reference here.
+
+### R² and Adjusted R²
+
+```python
+n = len(y_test)
+k = X_test.shape[1]
+
+for name, pred in [("scikit-learn", sklearn_pred), ("Our own class", custom_pred)]:
+    r2 = r2_score(y_test, pred)
+    adjusted_r2 = 1 - ((1 - r2) * (n - 1)) / (n - 1 - k)
+    print(f"{name}: R2={r2:.4f}  Adjusted R2={adjusted_r2:.4f}")
+```
+
+R² answers "how much better is this than just guessing the average every time" (the baseline model from Stage 6). A value of 1.0 would be a perfect fit, 0.0 means no better than the baseline, and a negative number would mean the model is actually worse than just guessing the mean.
+
+Adjusted R² exists because R² alone can look better just by adding more columns, even useless, noisy ones, it never goes down when a feature is added, even a garbage one. Adjusted R² applies a penalty based on how many features (`k`) were used relative to how many rows (`n`), which matters a lot here specifically because `X` has 91 columns, many of them from the `variant_grouped` one-hot columns where some categories only have a couple dozen rows behind them.
+
+### Residual plot
+
+```python
+residuals = y_test - sklearn_pred
+plt.scatter(sklearn_pred, residuals, s=10, alpha=0.4)
+plt.axhline(0, color='red', linestyle='--')
+plt.xlabel('Predicted log(listingPrice)')
+plt.ylabel('Residual (Actual - Predicted)')
+plt.title('Residual Plot')
+plt.show()
+```
+
+A residual is just the leftover error for one row, actual minus predicted. Plotting every residual against its predicted value is a pattern check: a healthy model shows a random, formless cloud of dots scattered evenly around the zero line (the red dashed line). If instead there is a visible shape, a curve, a funnel that widens on one side, a slope, that is a sign the model is systematically wrong in some predictable way (for example, consistently underpricing expensive cars), something a single R² number would hide.
+
+(Results and interpretation to be filled in after Restart & Run All, once the actual metric numbers are known.)
+
+
 
 ## Quick Reference: Things I Kept Confusing
 
