@@ -477,7 +477,61 @@ df_final['variant_grouped'] = df_final['variant'].where(
 
 ---
 
-(Next: Stage 5, Preprocessing, encode the categorical columns, decide the final feature set, and do the train/test split.)
+## Part 13: Stage 5, Preprocessing
+
+### The feature set
+
+Target: `log_listingPrice`. Features: `year`, `mileage`, `engine` (numeric, unchanged), plus `fuelType`, `transmission`, `manufacturer_grouped`, `variant_grouped` (categorical). Raw `manufacturer` and `variant` are excluded, the grouped versions already carry the same signal without the unusable long tail of rare categories.
+
+```python
+feature_cols = ['year', 'mileage', 'engine', 'fuelType', 'transmission', 'manufacturer_grouped', 'variant_grouped']
+X = df_final[feature_cols].copy()
+y = df_final['log_listingPrice'].copy()
+
+X = pd.get_dummies(X, columns=['fuelType', 'transmission', 'manufacturer_grouped', 'variant_grouped'], drop_first=True)
+X.shape   # (10164, 91)
+```
+
+### In plain words, using four made-up cars
+
+Car A: 2020, 10,000km, 1300cc, Petrol. Car B: 2015, 60,000km, 1500cc, Diesel. Car C: 2010, 120,000km, 800cc, Petrol. Car D: 2022, 5,000km, 1800cc, Hybrid.
+
+`X` is the set of clues handed to the model, `y` is the answer key (the real price) being predicted, kept completely separate so the model never gets to peek at the answer while guessing.
+
+One-hot encoding turns words into yes/no columns since a computer can't do math on the word "Petrol". With `drop_first=True`, one fuel type is picked as the silent default (say Petrol) and only gets columns for the others:
+
+| Car | is_Diesel | is_Hybrid |
+|---|---|---|
+| A | 0 | 0 |
+| B | 1 | 0 |
+| C | 0 | 0 |
+| D | 0 | 1 |
+
+A and C both show `0, 0`, meaning Petrol without needing their own column, since if a row isn't Diesel and isn't Hybrid, it must be Petrol. Keeping a Petrol column too would just repeat information already implied by the other two, and that redundancy (called the dummy variable trap) confuses linear regression's math.
+
+### Train/test split, then scaling, in that order
+
+```python
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# X_train: (8131, 91), X_test: (2033, 91)
+
+from sklearn.preprocessing import StandardScaler
+numeric_cols = ['year', 'mileage', 'engine']
+scaler = StandardScaler()
+X_train[numeric_cols] = scaler.fit_transform(X_train[numeric_cols])
+X_test[numeric_cols] = scaler.transform(X_test[numeric_cols])
+```
+
+Think of the four cars as flashcards. Most are kept to study from (train), one is set aside and never looked at while studying (test), then used afterward for an honest quiz. Scaling converts `year`/`mileage`/`engine` from raw units into "how many steps above or below average", so a column with naturally huge numbers (mileage in the tens of thousands) doesn't get treated as more important than a 0/1 column purely because its numbers are bigger.
+
+The split has to happen before scaling: the average and spread used for scaling must come only from the training cars, never influenced by the hidden test cards, that would be a small form of cheating, letting a bit of the answer leak into how the training data gets prepared. The scaler is `fit_transform`'d on train, then only `transform`'d (never re-fit) on test.
+
+Known result to keep in mind: `variant_grouped` alone came out to 72 categories (not the tight grouping originally pictured), which is most of why `X` has 91 columns. Not broken, 8,131 training rows against 91 features is still workable for plain linear regression, but it's a looser fit than ideal, some rare variant columns only have a couple dozen rows behind them, so their coefficients will be noisier. A known limitation, not something fixed today given the timeline.
+
+---
+
+(Next: Stage 6, Modeling. Baseline first (predict the mean, so there is something concrete to beat), then two versions of multiple linear regression side by side, scikit-learn's `LinearRegression`, and the custom `MultipleLinearRegression` class from `learningMultipleLinearRegression.ipynb`, which solves the same problem by hand with the Normal Equation.)
 
 
 ## Quick Reference: Things I Kept Confusing
