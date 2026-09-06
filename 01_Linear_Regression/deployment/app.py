@@ -1,9 +1,16 @@
 import json
+import os
 
 import joblib
 import numpy as np
 import pandas as pd
 import streamlit as st
+
+# Anchor artifact paths to this script's own folder rather than the process's
+# working directory. Locally that's the same thing, but Streamlit Community
+# Cloud launches the app from the repo root, not from this deployment folder,
+# so a bare relative path like "model.joblib" fails there with FileNotFoundError.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 st.set_page_config(
     page_title="Karachi Car Price Estimator",
@@ -16,9 +23,9 @@ st.set_page_config(
 # ----------------------------------------------------------------------
 @st.cache_resource
 def load_artifacts():
-    model = joblib.load("model.joblib")
-    scaler = joblib.load("scaler.joblib")
-    with open("meta.json") as f:
+    model = joblib.load(os.path.join(BASE_DIR, "model.joblib"))
+    scaler = joblib.load(os.path.join(BASE_DIR, "scaler.joblib"))
+    with open(os.path.join(BASE_DIR, "meta.json")) as f:
         meta = json.load(f)
     return model, scaler, meta
 
