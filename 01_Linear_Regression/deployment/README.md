@@ -29,6 +29,8 @@ Hugging Face Spaces moved to a paid tier for anything beyond the smallest free C
 
 ## Run it locally
 
+Needs Python 3.11 or newer (`pandas==3.0.2` in requirements.txt requires it).
+
 ```bash
 cd 01_Linear_Regression/deployment
 pip install -r requirements.txt
@@ -43,7 +45,8 @@ Opens at `http://localhost:8501`.
 2. Go to `share.streamlit.io` and sign in with GitHub.
 3. Click "New app", pick this repository and branch.
 4. Set the "Main file path" to `01_Linear_Regression/deployment/app.py`.
-5. Deploy. The first build installs `requirements.txt` and takes a minute or two; after that the app has a permanent public URL, free, with no trial period.
+5. Under "Advanced settings", set the Python version to 3.11 or newer (`pandas==3.0.2` in requirements.txt needs it; an older default Python version will fail the install step the same way it would locally).
+6. Deploy. The first build installs `requirements.txt` and takes a minute or two; after that the app has a permanent public URL, free, with no trial period.
 
 If the repository is private, Community Cloud can still deploy it after you grant it access to that specific repo during setup.
 
