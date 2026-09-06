@@ -33,6 +33,17 @@ MANUFACTURER_TO_VARIANTS = meta["manufacturer_to_variants"]
 
 
 def predict_price(year, mileage, engine, fuel_type, transmission, manufacturer, variant):
+    # Guard against a manufacturer/variant pair that never appears together in
+    # the real data (e.g. Mercedes + Corolla). The dropdowns already narrow
+    # Variant down to a given Manufacturer's own list, so this should never
+    # actually trigger through the UI, but it's kept as an explicit backend
+    # check rather than trusting the frontend never to get out of sync.
+    allowed_variants = MANUFACTURER_TO_VARIANTS.get(manufacturer, [])
+    if variant not in allowed_variants:
+        raise ValueError(
+            f"'{manufacturer}' does not make a '{variant}'. Pick a variant that matches the manufacturer."
+        )
+
     manufacturer_grouped = manufacturer if manufacturer in KEEP_MANUFACTURERS else "Other"
     variant_grouped = variant if variant in KEEP_VARIANTS else "Other"
 
@@ -132,9 +143,9 @@ st.markdown(
             margin-bottom: 0.6rem;
         }
 
-        div[data-testid="stForm"] {
+        div.st-key-car_form_card {
             background-color: #FFFFFF;
-            border: 1px solid #E5E1D6;
+            border: 1px solid #E5E1D6 !important;
             border-radius: 10px;
             padding: 1.8rem 1.8rem 1.2rem 1.8rem;
         }
@@ -150,7 +161,7 @@ st.markdown(
             border-color: #D8D3C6 !important;
         }
 
-        .stButton button, .stFormSubmitButton button {
+        .stButton button {
             background-color: #23241F;
             color: #F7F4EE;
             border: none;
@@ -161,7 +172,7 @@ st.markdown(
             transition: background-color 0.15s ease;
         }
 
-        .stButton button:hover, .stFormSubmitButton button:hover {
+        .stButton button:hover {
             background-color: #46473F;
             color: #F7F4EE;
         }
@@ -230,16 +241,29 @@ st.markdown(
 
 # ----------------------------------------------------------------------
 # Form
+#
+# Deliberately NOT using st.form here. Streamlit forms only re-run the
+# script when the submit button is pressed, so a Manufacturer change
+# inside a form would not refresh the Variant list until after the fact,
+# by which point you could already have picked a variant that belongs to
+# a different manufacturer (Mercedes + Corolla, for example). Using plain
+# widgets means every change re-runs immediately, so Variant always
+# reflects the manufacturer currently selected.
 # ----------------------------------------------------------------------
-with st.form("car_form"):
+with st.container(border=True, key="car_form_card"):
     st.markdown('<div class="section-label">Make &amp; Model</div>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
-        manufacturer = st.selectbox("Manufacturer", meta["manufacturer_options"], index=meta["manufacturer_options"].index("Toyota") if "Toyota" in meta["manufacturer_options"] else 0)
+        manufacturer = st.selectbox(
+            "Manufacturer",
+            meta["manufacturer_options"],
+            index=meta["manufacturer_options"].index("Toyota") if "Toyota" in meta["manufacturer_options"] else 0,
+            key="manufacturer",
+        )
     with col2:
         variant_choices = MANUFACTURER_TO_VARIANTS.get(manufacturer, meta["variant_options"])
         default_variant_index = variant_choices.index("Corolla") if "Corolla" in variant_choices else 0
-        variant = st.selectbox("Variant", variant_choices, index=default_variant_index)
+        variant = st.selectbox("Variant", variant_choices, index=default_variant_index, key="variant")
 
     st.markdown('<div class="section-label">Specifications</div>', unsafe_allow_html=True)
     col3, col4 = st.columns(2)
@@ -259,20 +283,24 @@ with st.form("car_form"):
 
     transmission = st.selectbox("Transmission", meta["transmission_options"])
 
-    submitted = st.form_submit_button("Estimate price")
+    submitted = st.button("Estimate price", use_container_width=True)
 
 if submitted:
-    price = predict_price(year, mileage, engine, fuel_type, transmission, manufacturer, variant)
-    st.markdown(
-        f"""
-        <div class="result-card">
-            <div class="result-label">Estimated Listing Price</div>
-            <div class="result-price">PKR {price:,.0f}</div>
-            <div class="result-caption">Typical error on unseen listings: roughly &plusmn;PKR {int(price * 0.17):,}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    try:
+        price = predict_price(year, mileage, engine, fuel_type, transmission, manufacturer, variant)
+    except ValueError as error:
+        st.error(str(error))
+    else:
+        st.markdown(
+            f"""
+            <div class="result-card">
+                <div class="result-label">Estimated Listing Price</div>
+                <div class="result-price">PKR {price:,.0f}</div>
+                <div class="result-caption">Typical error on unseen listings: roughly &plusmn;PKR {int(price * 0.17):,}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 st.markdown(
     """

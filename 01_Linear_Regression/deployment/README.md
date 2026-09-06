@@ -54,6 +54,10 @@ If the repository is private, Community Cloud can still deploy it after you gran
 
 If the notebook's cleaning or feature engineering steps change, rerun `train.py` (from inside this folder) to regenerate `model.joblib`, `scaler.joblib`, and `meta.json`. `train.py` mirrors Stage 2, Stage 4, Stage 5, and Stage 6 of the notebook exactly, confirmed by checking its test R2 (0.9226) matches the notebook's.
 
+## Input validation
+
+The Variant dropdown is filtered to only the variants a given Manufacturer actually has in the training data (built from the manufacturer-to-variant map in `meta.json`), so a mismatched pair like Mercedes Benz + Corolla can't be picked in the first place. The app also does not use `st.form`, deliberately: Streamlit forms only re-run the script when you press submit, which would let you change Manufacturer without the Variant list refreshing until after the fact. Plain widgets re-run immediately on every change instead. As a second line of defense, `predict_price()` itself raises a clear error if it's ever called with a manufacturer/variant pair that doesn't actually exist in the data, shown to the user instead of a price. Year, mileage, and engine size are bounded to the ranges seen in the training data via each input's min/max.
+
 ## Limitations
 
 Same as the notebook: trained on Karachi listings only, from December 2025, predicting asking price rather than confirmed sale price. The "typical error" shown under a prediction is the model's MAE on held out test data, expressed as a percentage of the predicted price, not a guarantee.
