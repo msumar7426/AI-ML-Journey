@@ -1,0 +1,287 @@
+import json
+
+import joblib
+import numpy as np
+import pandas as pd
+import streamlit as st
+
+st.set_page_config(
+    page_title="Karachi Car Price Estimator",
+    page_icon="🚗",
+    layout="centered",
+)
+
+# ----------------------------------------------------------------------
+# Load the trained model and everything Stage 4/5 computed, once per run
+# ----------------------------------------------------------------------
+@st.cache_resource
+def load_artifacts():
+    model = joblib.load("model.joblib")
+    scaler = joblib.load("scaler.joblib")
+    with open("meta.json") as f:
+        meta = json.load(f)
+    return model, scaler, meta
+
+
+model, scaler, meta = load_artifacts()
+
+FEATURE_COLUMNS = meta["feature_columns"]
+NUMERIC_COLS = meta["numeric_cols"]
+KEEP_MANUFACTURERS = set(meta["keep_manufacturers"])
+KEEP_VARIANTS = set(meta["keep_variants"])
+MANUFACTURER_TO_VARIANTS = meta["manufacturer_to_variants"]
+
+
+def predict_price(year, mileage, engine, fuel_type, transmission, manufacturer, variant):
+    manufacturer_grouped = manufacturer if manufacturer in KEEP_MANUFACTURERS else "Other"
+    variant_grouped = variant if variant in KEEP_VARIANTS else "Other"
+
+    row = pd.DataFrame(
+        [
+            {
+                "year": year,
+                "mileage": mileage,
+                "engine": engine,
+                "fuelType": fuel_type,
+                "transmission": transmission,
+                "manufacturer_grouped": manufacturer_grouped,
+                "variant_grouped": variant_grouped,
+            }
+        ]
+    )
+
+    row_encoded = pd.get_dummies(
+        row, columns=["fuelType", "transmission", "manufacturer_grouped", "variant_grouped"]
+    )
+    row_encoded = row_encoded.reindex(columns=FEATURE_COLUMNS, fill_value=0)
+    row_encoded[NUMERIC_COLS] = scaler.transform(row_encoded[NUMERIC_COLS])
+
+    log_price = model.predict(row_encoded)[0]
+    return float(np.exp(log_price))
+
+
+# ----------------------------------------------------------------------
+# Styling: a plain, editorial listing-page look. No gradients, no glow.
+# ----------------------------------------------------------------------
+st.markdown(
+    """
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
+
+        html, body, [class*="css"] {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .stApp {
+            background-color: #F7F4EE;
+        }
+
+        .block-container {
+            max-width: 720px;
+            padding-top: 3rem;
+            padding-bottom: 4rem;
+        }
+
+        #MainMenu, header, footer {
+            visibility: hidden;
+        }
+
+        .hero-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 2.4rem;
+            color: #23241F;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #6B6A63;
+            margin-bottom: 1.8rem;
+            line-height: 1.5;
+        }
+
+        .stat-strip {
+            display: flex;
+            gap: 1.6rem;
+            border-top: 1px solid #DEDACF;
+            border-bottom: 1px solid #DEDACF;
+            padding: 0.9rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            font-size: 0.82rem;
+            color: #6B6A63;
+        }
+
+        .stat-item b {
+            color: #23241F;
+            font-weight: 600;
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8B6A4A;
+            margin-top: 1.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        div[data-testid="stForm"] {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E1D6;
+            border-radius: 10px;
+            padding: 1.8rem 1.8rem 1.2rem 1.8rem;
+        }
+
+        .stSelectbox label, .stNumberInput label {
+            font-size: 0.85rem !important;
+            color: #4A4A44 !important;
+            font-weight: 500 !important;
+        }
+
+        div[data-baseweb="select"] > div, .stNumberInput input {
+            border-radius: 6px !important;
+            border-color: #D8D3C6 !important;
+        }
+
+        .stButton button, .stFormSubmitButton button {
+            background-color: #23241F;
+            color: #F7F4EE;
+            border: none;
+            border-radius: 6px;
+            padding: 0.6rem 1.4rem;
+            font-weight: 500;
+            width: 100%;
+            transition: background-color 0.15s ease;
+        }
+
+        .stButton button:hover, .stFormSubmitButton button:hover {
+            background-color: #46473F;
+            color: #F7F4EE;
+        }
+
+        .result-card {
+            background-color: #23241F;
+            border-radius: 10px;
+            padding: 1.8rem 2rem;
+            margin-top: 1.6rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #A8A69C;
+            margin-bottom: 0.4rem;
+        }
+
+        .result-price {
+            font-family: 'Fraunces', serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            color: #F7F4EE;
+        }
+
+        .result-caption {
+            font-size: 0.82rem;
+            color: #A8A69C;
+            margin-top: 0.5rem;
+        }
+
+        .footer-note {
+            font-size: 0.78rem;
+            color: #9A988E;
+            text-align: center;
+            margin-top: 2.5rem;
+            line-height: 1.6;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# ----------------------------------------------------------------------
+# Header
+# ----------------------------------------------------------------------
+st.markdown('<div class="hero-title">Karachi Car Price Estimator</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="hero-subtitle">Enter a car\'s specs and get an estimated asking price, '
+    "based on a multiple linear regression model trained on real Karachi marketplace listings.</div>",
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    f"""
+    <div class="stat-strip">
+        <div class="stat-item"><b>{meta['n_rows']:,}</b> listings trained on</div>
+        <div class="stat-item"><b>{meta['test_r2']:.0%}</b> of price variance explained</div>
+        <div class="stat-item"><b>{meta['year_min']}&ndash;{meta['year_max']}</b> model years covered</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# ----------------------------------------------------------------------
+# Form
+# ----------------------------------------------------------------------
+with st.form("car_form"):
+    st.markdown('<div class="section-label">Make &amp; Model</div>', unsafe_allow_html=True)
+    col1, col2 = st.columns(2)
+    with col1:
+        manufacturer = st.selectbox("Manufacturer", meta["manufacturer_options"], index=meta["manufacturer_options"].index("Toyota") if "Toyota" in meta["manufacturer_options"] else 0)
+    with col2:
+        variant_choices = MANUFACTURER_TO_VARIANTS.get(manufacturer, meta["variant_options"])
+        default_variant_index = variant_choices.index("Corolla") if "Corolla" in variant_choices else 0
+        variant = st.selectbox("Variant", variant_choices, index=default_variant_index)
+
+    st.markdown('<div class="section-label">Specifications</div>', unsafe_allow_html=True)
+    col3, col4 = st.columns(2)
+    with col3:
+        year = st.number_input(
+            "Year", min_value=meta["year_min"], max_value=meta["year_max"], value=2019, step=1
+        )
+        engine = st.number_input(
+            "Engine size (cc)", min_value=600, max_value=6500, value=meta["engine_median"], step=100
+        )
+    with col4:
+        mileage = st.number_input(
+            "Mileage (km)", min_value=0, max_value=500000, value=meta["mileage_median"], step=1000
+        )
+        petrol_index = meta["fueltype_options"].index("Petrol") if "Petrol" in meta["fueltype_options"] else 0
+        fuel_type = st.selectbox("Fuel type", meta["fueltype_options"], index=petrol_index)
+
+    transmission = st.selectbox("Transmission", meta["transmission_options"])
+
+    submitted = st.form_submit_button("Estimate price")
+
+if submitted:
+    price = predict_price(year, mileage, engine, fuel_type, transmission, manufacturer, variant)
+    st.markdown(
+        f"""
+        <div class="result-card">
+            <div class="result-label">Estimated Listing Price</div>
+            <div class="result-price">PKR {price:,.0f}</div>
+            <div class="result-caption">Typical error on unseen listings: roughly &plusmn;PKR {int(price * 0.17):,}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown(
+    """
+    <div class="footer-note">
+        Trained on real Karachi marketplace listings scraped December 2025. Estimates reflect
+        seller asking prices, not confirmed sale prices, and should not be used as a substitute
+        for an in person inspection.<br>
+        Built by M S Umar &middot; github.com/msumar7426
+    </div>
+    """,
+    unsafe_allow_html=True,
+)

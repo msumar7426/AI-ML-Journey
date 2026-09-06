@@ -51,6 +51,8 @@ project/
     NOTES.md                         full reasoning, explained in plain language, for every stage
 ```
 
+The Streamlit frontend for this model lives one level up, in `../deployment/` (a sibling of this folder, not nested inside it): manufacturer, variant, year, mileage, engine size, fuel type, transmission in, an estimated price out. Free to run locally or deploy on Streamlit Community Cloud. See `../deployment/README.md` for setup instructions.
+
 ## Tools Used
 
 Python, Pandas, NumPy, Matplotlib, scikit-learn, Jupyter Notebook.

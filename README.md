@@ -22,15 +22,15 @@ This repository documents my learning journey through theory, implementation, re
 
 ```text
 AI-ML-Journey/
-  AI_ML_Journey_Guidelines.md      how each topic is learned, step by step
+  docs/AI_ML_Journey_Guidelines.md  how each topic is learned, step by step
   templates/                       reusable templates (e.g. the ML project workflow)
-  00_Foundations/                  planned: Python/math foundations, not started yet
   01_Linear_Regression/            Simple and Multiple Linear Regression, Gradient Descent
     notes/                         concept notes and reference material for this topic
-    03_Gradient_Descent/           gradient descent (blocked, see below)
+    03_Gradient_Descent/           gradient descent (in progress)
       notes/
     project/                       real project: used car price prediction
       notes/
+    deployment/                    Streamlit frontend for the project above, sibling to project/
   02_Uni&MultivariateAnalysis/     univariate and multivariate EDA, pandas profiling
 ```
 
@@ -40,7 +40,7 @@ Every code folder keeps a `notes/` subfolder alongside it. That is where the con
 
 | Project | Status | Description |
 |---|---|---|
-| Used Car Price Prediction | Complete (8 of 8 stages) | Multiple linear regression on 15,171 real used car listings scraped from a Karachi marketplace. R2 of 0.92 on held out test data. See `01_Linear_Regression/project/README.md` for the full writeup, and `01_Linear_Regression/project/notes/` for the reasoning behind every decision. |
+| Used Car Price Prediction | Complete (8 of 8 stages), with a deployable frontend | Multiple linear regression on 15,171 real used car listings scraped from a Karachi marketplace. R2 of 0.92 on held out test data. Includes a Streamlit frontend (`01_Linear_Regression/deployment/`), free to run locally or deploy. See `01_Linear_Regression/project/README.md` for the full writeup, and `01_Linear_Regression/project/notes/` for the reasoning behind every decision. |
 
 ## Progress Tracker
 
@@ -49,7 +49,7 @@ Every code folder keeps a `notes/` subfolder alongside it. That is where the con
 | Environment Setup | Done |
 | Git and GitHub | Done |
 | Simple and Multiple Linear Regression (theory and from scratch code) | Done |
-| Gradient Descent | Blocked (source notebook is empty, needs to be redone) |
+| Gradient Descent | In progress |
 | Used Car Price Prediction project | Done |
 | Univariate and Multivariate Analysis | In progress |
 
@@ -66,18 +66,11 @@ Every topic follows this workflow:
 7. Document key learnings.
 8. Commit and push to GitHub.
 
-The full version of this workflow, including how to triage Python and math prerequisites for a new topic, is in `AI_ML_Journey_Guidelines.md`.
+The full version of this workflow, including how to triage Python and math prerequisites for a new topic, is in `docs/AI_ML_Journey_Guidelines.md`.
 
-## Long Term Vision
+## Where This Is Going
 
-This repository will grow beyond a course into a complete AI/ML portfolio featuring:
-
-- Machine Learning
-- Deep Learning
-- Natural Language Processing
-- Computer Vision
-- End to end AI projects
-- Deployment
+Each topic gets the same treatment as linear regression did: theory, a from-scratch implementation, and a real dataset project. Deep learning, NLP and deployment come after the fundamentals are solid.
 
 ## Contact
 
