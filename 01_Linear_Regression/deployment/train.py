@@ -110,6 +110,18 @@ manufacturer_to_variants = (
     .to_dict()
 )
 
+# Variant -> the actual range of engine sizes seen for it in real listings.
+# A Sportage isn't one fixed engine size across every year and trim, so this
+# isn't used to hard-block anything, just to warn when someone types in a
+# number nothing in the data ever had for that specific variant.
+variant_engine_range = (
+    df_final.groupby("variant")["engine"]
+    .agg(["min", "max", "median"])
+    .astype(int)
+    .apply(lambda row: {"min": int(row["min"]), "max": int(row["max"]), "median": int(row["median"])}, axis=1)
+    .to_dict()
+)
+
 meta = {
     "feature_columns": X.columns.tolist(),
     "numeric_cols": numeric_cols,
@@ -120,6 +132,7 @@ meta = {
     "fueltype_options": fueltype_options,
     "transmission_options": transmission_options,
     "manufacturer_to_variants": manufacturer_to_variants,
+    "variant_engine_range": variant_engine_range,
     "year_min": int(df_final["year"].min()),
     "year_max": int(df_final["year"].max()),
     "mileage_median": int(df_final["mileage"].median()),

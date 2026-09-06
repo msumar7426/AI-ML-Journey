@@ -30,6 +30,7 @@ NUMERIC_COLS = meta["numeric_cols"]
 KEEP_MANUFACTURERS = set(meta["keep_manufacturers"])
 KEEP_VARIANTS = set(meta["keep_variants"])
 MANUFACTURER_TO_VARIANTS = meta["manufacturer_to_variants"]
+VARIANT_ENGINE_RANGE = meta.get("variant_engine_range", {})
 
 
 def predict_price(year, mileage, engine, fuel_type, transmission, manufacturer, variant):
@@ -271,9 +272,34 @@ with st.container(border=True, key="car_form_card"):
         year = st.number_input(
             "Year", min_value=meta["year_min"], max_value=meta["year_max"], value=2019, step=1
         )
+
+        engine_range = VARIANT_ENGINE_RANGE.get(variant)
+        engine_default = engine_range["median"] if engine_range else meta["engine_median"]
+        # Keying by variant means the default resets to that variant's own
+        # typical engine size when you switch cars, rather than carrying
+        # over whatever the previous variant's engine value happened to be.
         engine = st.number_input(
-            "Engine size (cc)", min_value=600, max_value=6500, value=meta["engine_median"], step=100
+            "Engine size (cc)",
+            min_value=600,
+            max_value=6500,
+            value=engine_default,
+            step=100,
+            key=f"engine_{variant}",
         )
+        if engine_range:
+            single_value = engine_range["min"] == engine_range["max"]
+            if single_value:
+                range_text = f"{engine_range['min']:,}cc"
+                st.caption(f"Every {variant} in our data is {range_text}.")
+            else:
+                range_text = f"{engine_range['min']:,}–{engine_range['max']:,}cc"
+                st.caption(f"Typical for {variant}: {range_text}")
+            if not (engine_range["min"] <= engine <= engine_range["max"]):
+                st.warning(
+                    f"{engine:,}cc is outside what we've seen for {variant} "
+                    f"({range_text} in our data). "
+                    "The estimate below may be less reliable for this combination."
+                )
     with col4:
         mileage = st.number_input(
             "Mileage (km)", min_value=0, max_value=500000, value=meta["mileage_median"], step=1000

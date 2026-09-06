@@ -1074,6 +1074,1753 @@
       "M38"
     ]
   },
+  "variant_engine_range": {
+    " Mini Bus": {
+      "min": 1055,
+      "max": 1055,
+      "median": 1055
+    },
+    "120 Y": {
+      "min": 1200,
+      "max": 1200,
+      "median": 1200
+    },
+    "1200": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "2008": {
+      "min": 1200,
+      "max": 1200,
+      "median": 1200
+    },
+    "3": {
+      "min": 0,
+      "max": 1000,
+      "median": 0
+    },
+    "3 Series": {
+      "min": 1600,
+      "max": 3000,
+      "median": 1900
+    },
+    "323": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "350Z": {
+      "min": 3500,
+      "max": 3500,
+      "median": 3500
+    },
+    "4": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "4 Runner": {
+      "min": 4000,
+      "max": 4000,
+      "median": 4000
+    },
+    "5 Series": {
+      "min": 2000,
+      "max": 3000,
+      "median": 2500
+    },
+    "626": {
+      "min": 2200,
+      "max": 2200,
+      "median": 2200
+    },
+    "7 Series": {
+      "min": 0,
+      "max": 4400,
+      "median": 3000
+    },
+    "86": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "A3": {
+      "min": 1200,
+      "max": 1200,
+      "median": 1200
+    },
+    "A4": {
+      "min": 1400,
+      "max": 2000,
+      "median": 1800
+    },
+    "A5": {
+      "min": 1400,
+      "max": 2000,
+      "median": 1400
+    },
+    "A6": {
+      "min": 1800,
+      "max": 3000,
+      "median": 1800
+    },
+    "AD Van": {
+      "min": 1200,
+      "max": 1300,
+      "median": 1300
+    },
+    "APV": {
+      "min": 1500,
+      "max": 1600,
+      "median": 1600
+    },
+    "Accord": {
+      "min": 1300,
+      "max": 2400,
+      "median": 2000
+    },
+    "Acty": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Airwave": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Allion": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Almera": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Alpha": {
+      "min": 993,
+      "max": 993,
+      "median": 993
+    },
+    "Alphard": {
+      "min": 3000,
+      "max": 3000,
+      "median": 3000
+    },
+    "Alsvin": {
+      "min": 1300,
+      "max": 1500,
+      "median": 1500
+    },
+    "Alto": {
+      "min": 658,
+      "max": 1000,
+      "median": 660
+    },
+    "Alto Lapin": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Aqua": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Aria": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Aristo": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Ariya": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Atrai Wagon": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Atto 3": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Axela": {
+      "min": 1500,
+      "max": 1600,
+      "median": 1500
+    },
+    "BJ40 Plus": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "BR-V": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Baleno": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "Beetle": {
+      "min": 1200,
+      "max": 1600,
+      "median": 1300
+    },
+    "Belta": {
+      "min": 1000,
+      "max": 1300,
+      "median": 1000
+    },
+    "Benz C Class": {
+      "min": 1496,
+      "max": 6200,
+      "median": 1800
+    },
+    "Benz CLA Class": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "Benz CLS Class": {
+      "min": 3500,
+      "max": 3500,
+      "median": 3500
+    },
+    "Benz E Class": {
+      "min": 1500,
+      "max": 5500,
+      "median": 2000
+    },
+    "Benz E Class Coupe": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Benz EQC": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Benz G Class": {
+      "min": 0,
+      "max": 4000,
+      "median": 4000
+    },
+    "Benz GLA Class": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "Benz S Class": {
+      "min": 3500,
+      "max": 6203,
+      "median": 5250
+    },
+    "Benz SLK Class": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "Benz Sprinter": {
+      "min": 2900,
+      "max": 2900,
+      "median": 2900
+    },
+    "Benz Unimog": {
+      "min": 3500,
+      "max": 3500,
+      "median": 3500
+    },
+    "Benz Viano": {
+      "min": 2400,
+      "max": 2400,
+      "median": 2400
+    },
+    "Blue Bird": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Bluebird Sylphy": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Bolan": {
+      "min": 556,
+      "max": 1000,
+      "median": 800
+    },
+    "Boon": {
+      "min": 996,
+      "max": 1300,
+      "median": 1000
+    },
+    "Box": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Bravo": {
+      "min": 800,
+      "max": 800,
+      "median": 800
+    },
+    "C+pod": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "C-HR": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "CJ 5": {
+      "min": 2000,
+      "max": 2200,
+      "median": 2100
+    },
+    "CR-V": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "CR-Z": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "CS95": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "CT200h": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "Camry": {
+      "min": 2400,
+      "max": 2500,
+      "median": 2400
+    },
+    "Caravan": {
+      "min": 2700,
+      "max": 2700,
+      "median": 2700
+    },
+    "Carina": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Carnival": {
+      "min": 3470,
+      "max": 3500,
+      "median": 3500
+    },
+    "Carol": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Carrier": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Cast": {
+      "min": 658,
+      "max": 660,
+      "median": 660
+    },
+    "Cayenne": {
+      "min": 3000,
+      "max": 4500,
+      "median": 3000
+    },
+    "Cedric": {
+      "min": 3000,
+      "max": 3000,
+      "median": 3000
+    },
+    "Cefiro": {
+      "min": 2300,
+      "max": 2300,
+      "median": 2300
+    },
+    "Celica": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Ceres": {
+      "min": 2367,
+      "max": 2367,
+      "median": 2367
+    },
+    "Cervo": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Charade": {
+      "min": 1000,
+      "max": 1300,
+      "median": 1000
+    },
+    "Charmant": {
+      "min": 1200,
+      "max": 1200,
+      "median": 1200
+    },
+    "Ciaz": {
+      "min": 1400,
+      "max": 1400,
+      "median": 1400
+    },
+    "City": {
+      "min": 1200,
+      "max": 1600,
+      "median": 1300
+    },
+    "Civic": {
+      "min": 1200,
+      "max": 2400,
+      "median": 1800
+    },
+    "Classic": {
+      "min": 1300,
+      "max": 1323,
+      "median": 1323
+    },
+    "Clipper": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Coaster": {
+      "min": 4000,
+      "max": 4000,
+      "median": 4000
+    },
+    "Cooper": {
+      "min": 0,
+      "max": 1600,
+      "median": 330
+    },
+    "Copen": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Corolla": {
+      "min": 1000,
+      "max": 2500,
+      "median": 1600
+    },
+    "Corolla Axio": {
+      "min": 1300,
+      "max": 1800,
+      "median": 1500
+    },
+    "Corolla Cross": {
+      "min": 1798,
+      "max": 1800,
+      "median": 1800
+    },
+    "Corolla Fielder": {
+      "min": 1500,
+      "max": 1800,
+      "median": 1500
+    },
+    "Corolla Touring": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "Corona": {
+      "min": 1500,
+      "max": 2500,
+      "median": 1550
+    },
+    "Coupe": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Cressida": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Cross Road": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "Crown": {
+      "min": 2500,
+      "max": 4000,
+      "median": 3000
+    },
+    "Cultus": {
+      "min": 660,
+      "max": 1800,
+      "median": 1000
+    },
+    "Cuore": {
+      "min": 660,
+      "max": 1500,
+      "median": 800
+    },
+    "D-Max": {
+      "min": 3000,
+      "max": 3000,
+      "median": 3000
+    },
+    "Dashing": {
+      "min": 1498,
+      "max": 1500,
+      "median": 1499
+    },
+    "Dayz": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Dayz Highway Star": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Dayz Roox": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Demio": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "Duet": {
+      "min": 890,
+      "max": 1300,
+      "median": 1000
+    },
+    "EK Custom": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "EK Space Custom": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "EK X": {
+      "min": 659,
+      "max": 660,
+      "median": 659
+    },
+    "EV5": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Ek Wagon": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Elantra": {
+      "min": 1600,
+      "max": 2000,
+      "median": 2000
+    },
+    "Esse": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Estima": {
+      "min": 2200,
+      "max": 2700,
+      "median": 2400
+    },
+    "Every": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Every Wagon": {
+      "min": 660,
+      "max": 1000,
+      "median": 660
+    },
+    "Excel": {
+      "min": 1500,
+      "max": 1600,
+      "median": 1500
+    },
+    "Exclusive": {
+      "min": 800,
+      "max": 1000,
+      "median": 1000
+    },
+    "F 150": {
+      "min": 3000,
+      "max": 5000,
+      "median": 3500
+    },
+    "F 150 Shelby": {
+      "min": 5000,
+      "max": 5000,
+      "median": 5000
+    },
+    "FX": {
+      "min": 660,
+      "max": 1000,
+      "median": 800
+    },
+    "FX35": {
+      "min": 800,
+      "max": 800,
+      "median": 800
+    },
+    "Feroza": {
+      "min": 2200,
+      "max": 2200,
+      "median": 2200
+    },
+    "Fit": {
+      "min": 1300,
+      "max": 1500,
+      "median": 1500
+    },
+    "Fj Cruiser": {
+      "min": 3500,
+      "max": 4000,
+      "median": 4000
+    },
+    "Flair": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Forfour": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Fortuner": {
+      "min": 2700,
+      "max": 2800,
+      "median": 2800
+    },
+    "Foton": {
+      "min": 2800,
+      "max": 2800,
+      "median": 2800
+    },
+    "Freed": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Galant": {
+      "min": 1500,
+      "max": 2500,
+      "median": 2000
+    },
+    "Gen 2": {
+      "min": 1300,
+      "max": 1600,
+      "median": 1450
+    },
+    "Gilgit": {
+      "min": 800,
+      "max": 800,
+      "median": 800
+    },
+    "Gladiator ": {
+      "min": 3600,
+      "max": 3604,
+      "median": 3602
+    },
+    "Glory 500": {
+      "min": 800,
+      "max": 1500,
+      "median": 1150
+    },
+    "Glory 580": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Grace Hybrid": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Guru": {
+      "min": 3299,
+      "max": 3299,
+      "median": 3299
+    },
+    "H-100": {
+      "min": 2600,
+      "max": 2600,
+      "median": 2600
+    },
+    "H3": {
+      "min": 5300,
+      "max": 5300,
+      "median": 5300
+    },
+    "H6": {
+      "min": 1500,
+      "max": 2000,
+      "median": 1500
+    },
+    "HR-V": {
+      "min": 1500,
+      "max": 1800,
+      "median": 1500
+    },
+    "HS": {
+      "min": 1490,
+      "max": 1500,
+      "median": 1500
+    },
+    "Harrier": {
+      "min": 2400,
+      "max": 3310,
+      "median": 2500
+    },
+    "Hiace": {
+      "min": 2400,
+      "max": 3000,
+      "median": 2700
+    },
+    "Hijet": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Hilux": {
+      "min": 2400,
+      "max": 4000,
+      "median": 2800
+    },
+    "Hummer EV": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Hustler": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "I": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "ISIS": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "IST": {
+      "min": 1300,
+      "max": 1500,
+      "median": 1300
+    },
+    "Impian": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "Insight": {
+      "min": 1300,
+      "max": 1500,
+      "median": 1300
+    },
+    "Integra": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "Ioniq 5": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "J6": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Jimny": {
+      "min": 658,
+      "max": 1500,
+      "median": 660
+    },
+    "Jolion": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Joy": {
+      "min": 660,
+      "max": 1000,
+      "median": 900
+    },
+    "Juke": {
+      "min": 1500,
+      "max": 1600,
+      "median": 1500
+    },
+    "K07": {
+      "min": 997,
+      "max": 997,
+      "median": 997
+    },
+    "Karvaan": {
+      "min": 1000,
+      "max": 1200,
+      "median": 1000
+    },
+    "Kei": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Khyber": {
+      "min": 1000,
+      "max": 1300,
+      "median": 1000
+    },
+    "Kicks": {
+      "min": 1200,
+      "max": 1300,
+      "median": 1200
+    },
+    "Kix": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Kizashi": {
+      "min": 2400,
+      "max": 2400,
+      "median": 2400
+    },
+    "Kona": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "L200": {
+      "min": 2500,
+      "max": 2500,
+      "median": 2500
+    },
+    "LX Series": {
+      "min": 3445,
+      "max": 5700,
+      "median": 5700
+    },
+    "Lancer": {
+      "min": 1000,
+      "max": 2000,
+      "median": 1300
+    },
+    "Lancer Evolution X": {
+      "min": 2000,
+      "max": 2500,
+      "median": 2250
+    },
+    "Land Cruiser": {
+      "min": 100,
+      "max": 4700,
+      "median": 4600
+    },
+    "Leaf": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Liana": {
+      "min": 1300,
+      "max": 1600,
+      "median": 1300
+    },
+    "Life": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Lucida": {
+      "min": 2400,
+      "max": 2400,
+      "median": 2400
+    },
+    "M 151": {
+      "min": 1800,
+      "max": 2300,
+      "median": 2200
+    },
+    "M38": {
+      "min": 3300,
+      "max": 3300,
+      "median": 3300
+    },
+    "M9": {
+      "min": 999,
+      "max": 1200,
+      "median": 999
+    },
+    "MR Wagon": {
+      "min": 660,
+      "max": 1000,
+      "median": 830
+    },
+    "MX 5": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "March": {
+      "min": 1000,
+      "max": 1400,
+      "median": 1200
+    },
+    "Margalla": {
+      "min": 1000,
+      "max": 1300,
+      "median": 1300
+    },
+    "Mark II": {
+      "min": 2000,
+      "max": 4300,
+      "median": 2000
+    },
+    "Mark X": {
+      "min": 2500,
+      "max": 3000,
+      "median": 2500
+    },
+    "Mehran": {
+      "min": 500,
+      "max": 800,
+      "median": 800
+    },
+    "Minica": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Minicab": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Mira": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Mira Gino": {
+      "min": 1200,
+      "max": 1200,
+      "median": 1200
+    },
+    "Mirage": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Moco": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Model 3": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Move": {
+      "min": 658,
+      "max": 660,
+      "median": 660
+    },
+    "Move Canbus": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Mustang": {
+      "min": 4951,
+      "max": 4951,
+      "median": 4951
+    },
+    "N Box": {
+      "min": 658,
+      "max": 660,
+      "median": 660
+    },
+    "N One": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "N Wgn": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "N-Van": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "New Boarding": {
+      "min": 2800,
+      "max": 2800,
+      "median": 2800
+    },
+    "Noah": {
+      "min": 1800,
+      "max": 2000,
+      "median": 1800
+    },
+    "Note": {
+      "min": 1198,
+      "max": 1200,
+      "median": 1200
+    },
+    "Note Aura": {
+      "min": 1200,
+      "max": 1200,
+      "median": 1200
+    },
+    "Nx": {
+      "min": 2500,
+      "max": 2500,
+      "median": 2500
+    },
+    "Omoda": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Optra": {
+      "min": 1400,
+      "max": 1600,
+      "median": 1600
+    },
+    "Oshan X7": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Other": {
+      "min": 800,
+      "max": 3000,
+      "median": 1900
+    },
+    "Otti": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Pajero": {
+      "min": 2200,
+      "max": 3500,
+      "median": 2800
+    },
+    "Pajero Mini": {
+      "min": 660,
+      "max": 1100,
+      "median": 660
+    },
+    "Passo": {
+      "min": 660,
+      "max": 1300,
+      "median": 1000
+    },
+    "Patrol": {
+      "min": 3000,
+      "max": 5600,
+      "median": 4300
+    },
+    "Pearl": {
+      "min": 800,
+      "max": 800,
+      "median": 800
+    },
+    "Picanto": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Pickup": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Pino": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Pixis Epoch": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Pixis Joy": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Pixis Mega": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Pixis Space": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Platz": {
+      "min": 1000,
+      "max": 1300,
+      "median": 1000
+    },
+    "Pleo": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Pleo Plus": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Potohar": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Prado": {
+      "min": 2400,
+      "max": 4000,
+      "median": 2700
+    },
+    "Premio": {
+      "min": 1500,
+      "max": 2000,
+      "median": 1500
+    },
+    "Pride": {
+      "min": 1000,
+      "max": 1300,
+      "median": 1100
+    },
+    "Prius": {
+      "min": 1497,
+      "max": 1800,
+      "median": 1800
+    },
+    "Prius Alpha": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "Probox": {
+      "min": 1300,
+      "max": 1500,
+      "median": 1300
+    },
+    "Q2": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Q3": {
+      "min": 1400,
+      "max": 1400,
+      "median": 1400
+    },
+    "Q4 e-tron": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Q5": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Q7": {
+      "min": 3600,
+      "max": 3600,
+      "median": 3600
+    },
+    "QQ": {
+      "min": 800,
+      "max": 800,
+      "median": 800
+    },
+    "RX Series": {
+      "min": 0,
+      "max": 3500,
+      "median": 3500
+    },
+    "RX8": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "RZ": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Racer": {
+      "min": 1500,
+      "max": 1600,
+      "median": 1500
+    },
+    "Ractis": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "Raize": {
+      "min": 1000,
+      "max": 1200,
+      "median": 1000
+    },
+    "Ranger": {
+      "min": 3000,
+      "max": 3198,
+      "median": 3000
+    },
+    "Rav4": {
+      "min": 2000,
+      "max": 2500,
+      "median": 2400
+    },
+    "Ravi": {
+      "min": 660,
+      "max": 1000,
+      "median": 800
+    },
+    "Renegade": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "Revo": {
+      "min": 800,
+      "max": 800,
+      "median": 800
+    },
+    "Rocky": {
+      "min": 1000,
+      "max": 2500,
+      "median": 1000
+    },
+    "Roomy": {
+      "min": 996,
+      "max": 1000,
+      "median": 1000
+    },
+    "Roox": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Rosa": {
+      "min": 3000,
+      "max": 3000,
+      "median": 3000
+    },
+    "Rover Autobiography": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Rover Defender": {
+      "min": 2200,
+      "max": 2500,
+      "median": 2200
+    },
+    "Rover Evoque": {
+      "min": 4200,
+      "max": 4200,
+      "median": 4200
+    },
+    "Rover Sport": {
+      "min": 4200,
+      "max": 5000,
+      "median": 5000
+    },
+    "Rover Vogue": {
+      "min": 3000,
+      "max": 3000,
+      "median": 3000
+    },
+    "Rush": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Rvr": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "S Type": {
+      "min": 3000,
+      "max": 3000,
+      "median": 3000
+    },
+    "S05": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "S07": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "S660": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Safari": {
+      "min": 4200,
+      "max": 4200,
+      "median": 4200
+    },
+    "Saga": {
+      "min": 1299,
+      "max": 1300,
+      "median": 1299
+    },
+    "Sakura": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Sambar ": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Samurai": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "Santa Fe": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "Santro": {
+      "min": 660,
+      "max": 1100,
+      "median": 1000
+    },
+    "Scrum Van": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Scrum Wagon": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Seal": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Sera": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "Serena": {
+      "min": 1200,
+      "max": 2000,
+      "median": 1200
+    },
+    "Shark 6": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Shehzore": {
+      "min": 2600,
+      "max": 2600,
+      "median": 2600
+    },
+    "Sienta": {
+      "min": 1500,
+      "max": 1800,
+      "median": 1500
+    },
+    "Sirius": {
+      "min": 1300,
+      "max": 1500,
+      "median": 1400
+    },
+    "Skyline": {
+      "min": 3500,
+      "max": 3500,
+      "median": 3500
+    },
+    "Solio": {
+      "min": 1200,
+      "max": 1200,
+      "median": 1200
+    },
+    "Sonata": {
+      "min": 2000,
+      "max": 2500,
+      "median": 2500
+    },
+    "Sorento": {
+      "min": 1600,
+      "max": 3500,
+      "median": 2400
+    },
+    "Spacia": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Spike": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Sportage": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Sportage L": {
+      "min": 1600,
+      "max": 2000,
+      "median": 1600
+    },
+    "Sprinter": {
+      "min": 1300,
+      "max": 1600,
+      "median": 1300
+    },
+    "Starlet": {
+      "min": 1000,
+      "max": 1300,
+      "median": 1000
+    },
+    "Stavic": {
+      "min": 2700,
+      "max": 2700,
+      "median": 2700
+    },
+    "Stella": {
+      "min": 660,
+      "max": 1000,
+      "median": 660
+    },
+    "Stonic": {
+      "min": 1400,
+      "max": 1400,
+      "median": 1400
+    },
+    "Storia": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Sunny": {
+      "min": 1000,
+      "max": 1600,
+      "median": 1300
+    },
+    "Surf": {
+      "min": 2700,
+      "max": 4000,
+      "median": 3000
+    },
+    "Swift": {
+      "min": 1000,
+      "max": 1600,
+      "median": 1300
+    },
+    "T6": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "T9": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Tacoma": {
+      "min": 2400,
+      "max": 3500,
+      "median": 3500
+    },
+    "Taft": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Tanto": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Taycan": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Terios": {
+      "min": 660,
+      "max": 1600,
+      "median": 1300
+    },
+    "Terios Kid": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Thor": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Tiggo 4 Pro": {
+      "min": 1498,
+      "max": 1498,
+      "median": 1498
+    },
+    "Tiggo 8 Pro": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "Tiida": {
+      "min": 1500,
+      "max": 1600,
+      "median": 1600
+    },
+    "Town Ace": {
+      "min": 1500,
+      "max": 2000,
+      "median": 1500
+    },
+    "Transit": {
+      "min": 2000,
+      "max": 2000,
+      "median": 2000
+    },
+    "Tucson": {
+      "min": 1600,
+      "max": 2000,
+      "median": 2000
+    },
+    "Tundra": {
+      "min": 3400,
+      "max": 5700,
+      "median": 5700
+    },
+    "UX ": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Up": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "V2": {
+      "min": 1300,
+      "max": 1300,
+      "median": 1300
+    },
+    "Vamos": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "Verossa": {
+      "min": 2700,
+      "max": 2700,
+      "median": 2700
+    },
+    "Vezel": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Vitara": {
+      "min": 1600,
+      "max": 1600,
+      "median": 1600
+    },
+    "Vitz": {
+      "min": 996,
+      "max": 1500,
+      "median": 1000
+    },
+    "Voxy": {
+      "min": 1800,
+      "max": 2000,
+      "median": 1800
+    },
+    "Wagon R": {
+      "min": 660,
+      "max": 1000,
+      "median": 1000
+    },
+    "Wingroad": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Wish": {
+      "min": 1800,
+      "max": 1800,
+      "median": 1800
+    },
+    "Wrangler": {
+      "min": 1600,
+      "max": 3600,
+      "median": 1800
+    },
+    "X-PV": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "X1": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "X2": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "X5": {
+      "min": 3000,
+      "max": 3000,
+      "median": 3000
+    },
+    "X70": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Xbee": {
+      "min": 1000,
+      "max": 1000,
+      "median": 1000
+    },
+    "Xio": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Yaris Cross": {
+      "min": 1500,
+      "max": 1500,
+      "median": 1500
+    },
+    "Yaris Hatchback": {
+      "min": 996,
+      "max": 1500,
+      "median": 1000
+    },
+    "Yaris Sedan": {
+      "min": 1000,
+      "max": 1500,
+      "median": 1300
+    },
+    "ZS": {
+      "min": 1490,
+      "max": 1500,
+      "median": 1490
+    },
+    "ZS EV": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "Zest": {
+      "min": 660,
+      "max": 660,
+      "median": 660
+    },
+    "e-tron": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "e-tron GT": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    },
+    "iQ": {
+      "min": 1000,
+      "max": 1300,
+      "median": 1150
+    },
+    "iX": {
+      "min": 0,
+      "max": 0,
+      "median": 0
+    }
+  },
   "year_min": 1951,
   "year_max": 2025,
   "mileage_median": 80000,
